@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { prisma } from "./lib/prisma";
+import { env } from "./config/env";
 
 dotenv.config();
 
@@ -27,5 +28,6 @@ app.get("/api/prompts", async (_req, res) => {
   res.json(rows);
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(env.PORT, () => {
+  console.log(`Server running on port ${env.PORT}`);
+});
