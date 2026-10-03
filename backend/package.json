@@ -8,7 +8,10 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test:gemini": "tsx src/scripts/testGemini.ts"
+    "test:gemini": "tsx src/scripts/testGemini.ts",
+    "test:analyze": "tsx src/scripts/testAnalyze.ts",
+    "test:pipeline": "tsx src/scripts/testPipeline.ts",
+    "test:demo": "tsx src/scripts/testDemo.ts"
   },
   "keywords": [],
   "author": "",

@@ -53,6 +53,7 @@ export class GeminiProvider implements LLMService {
           config: {
             systemInstruction: systemPrompt,
             responseMimeType: "application/json",
+            responseJsonSchema: z.toJSONSchema(schema),
             temperature: 0.2,
           },
         })
@@ -63,7 +64,7 @@ export class GeminiProvider implements LLMService {
     try {
       response = await call(this.model);
     } catch (err: any) {
-      if (err?.status === 503 && env.GEMINI_FALLBACK_MODEL) {
+      if ((err?.status === 503 || err?.status === 429) && env.GEMINI_FALLBACK_MODEL) {
         try {
           usedModel = env.GEMINI_FALLBACK_MODEL;
           response = await call(usedModel);
