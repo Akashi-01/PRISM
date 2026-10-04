@@ -17,9 +17,12 @@ model PromptSession {
   rawPrompt       String   @db.Text
   optimizedPrompt String?  @db.Text
   analysis        Json?
+  meta            Json?
   tokensBefore    Int?
   tokensAfter     Int?
+  tokensSaved     Int?
   percentSaved    Float?
   model           String?
+  latencyMs       Int?
   createdAt       DateTime @default(now())
 }

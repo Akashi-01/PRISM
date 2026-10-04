@@ -112,18 +112,15 @@ export class GeminiProvider implements LLMService {
   }
 
   async countTokens(text: string): Promise<number> {
-    try {
-      const result = await withRetry(() =>
-        this.ai.models.countTokens({
-          model: this.model,
-          contents: text,
-        })
-      );
-      return result.totalTokens ?? 0;
-    } catch (err) {
-      throw new LLMError("Gemini countTokens failed", err);
-    }
+  try {
+    const res = await withRetry(() =>
+      this.ai.models.countTokens({ model: this.model, contents: text })
+    );
+    return res.totalTokens ?? 0;
+  } catch (err) {
+    throw new LLMError("Gemini countTokens failed", err);
   }
+}
 
   // Safety net in case the model wraps JSON in ```json fences
   private stripCodeFences(text: string): string {
