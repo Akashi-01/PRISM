@@ -3,7 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import TokenSavingsCard from "../components/TokenSavingsCard";
 import PromptComparison from "../components/PromptComparison";
 import AnalysisPanel from "../components/AnalysisPanel";
-import { getPrompt, getErrorMessage } from '../api/prompts'
+import { getPrompt, getErrorMessage } from '../api/prompts';
+import PipelineStepper from "../components/PipelineStepper";
 
 export default function ResultsPage() {
   const { id } = useParams();
@@ -53,6 +54,8 @@ export default function ResultsPage() {
           New prompt
         </Link>
       </header>
+
+      <PipelineStepper />
 
       <TokenSavingsCard
         before={run.tokensBefore}
