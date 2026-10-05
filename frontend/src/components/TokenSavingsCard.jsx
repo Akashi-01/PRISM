@@ -1,31 +1,60 @@
-import Section from "./Section";
-
 export default function TokenSavingsCard({ before, after, saved, percent }) {
   const positive = saved > 0;
-  const color = positive ? "text-green-600" : "text-amber-600";
+  const pct = Number(percent);
+  const barWidth = before > 0 ? Math.min(100, (after / before) * 100) : 100;
 
   return (
-    <Section title="Token savings">
-      <div className="grid grid-cols-2 gap-4 text-center md:grid-cols-4">
-        <Stat label="Before" value={before} />
-        <Stat label="After" value={after} />
-        <Stat label="Saved" value={saved} className={color} />
-        <Stat label="% saved" value={`${Number(percent).toFixed(1)}%`} className={color} big />
+    <section
+      className={`rounded-2xl p-6 text-white shadow-lg md:p-8 ${
+        positive
+          ? "bg-gradient-to-r from-indigo-600 to-violet-600"
+          : "bg-gradient-to-r from-slate-700 to-slate-600"
+      }`}
+    >
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="text-xs uppercase tracking-wider opacity-80">
+            {positive ? "Tokens saved" : "Structure added"}
+          </p>
+          <p className="text-6xl font-bold leading-none md:text-7xl">
+            {pct.toFixed(1)}%
+          </p>
+        </div>
+
+        <div className="flex gap-6 text-right">
+          <Stat label="Before" value={before} />
+          <Stat label="After" value={after} />
+          <Stat label={positive ? "Saved" : "Added"} value={Math.abs(saved)} />
+        </div>
       </div>
+
+      <div className="mt-6">
+        <div className="h-3 w-full rounded-full bg-white/20">
+          <div
+            className="h-3 rounded-full bg-white transition-all duration-1000"
+            style={{ width: `${barWidth}%` }}
+          />
+        </div>
+        <div className="mt-2 flex justify-between text-xs opacity-80">
+          <span>{after} tokens after</span>
+          <span>{before} tokens before</span>
+        </div>
+      </div>
+
       {!positive && (
-        <p className="mt-3 text-sm text-amber-700">
-          No token reduction on this run. The optimizer added clarity instead of cutting length.
+        <p className="mt-4 text-sm opacity-90">
+          This prompt was short, so the optimizer added structure instead of cutting length.
         </p>
       )}
-    </Section>
+    </section>
   );
 }
 
-function Stat({ label, value, className = "text-gray-900", big }) {
+function Stat({ label, value }) {
   return (
     <div>
-      <div className={`${big ? "text-4xl" : "text-2xl"} font-bold ${className}`}>{value}</div>
-      <div className="text-xs uppercase tracking-wide text-gray-500">{label}</div>
+      <div className="text-2xl font-semibold">{value}</div>
+      <div className="text-xs uppercase tracking-wide opacity-75">{label}</div>
     </div>
   );
 }

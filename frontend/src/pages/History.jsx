@@ -5,6 +5,11 @@ import Spinner from '../components/Spinner'
 import ErrorBanner from '../components/ErrorBanner'
 import TokenSavingsChart from '../components/TokenSavingsChart'
 
+const badge = (pct) =>
+    pct > 0
+        ? { text: 'Compressed', cls: 'bg-green-100 text-green-700' }
+        : { text: 'Expanded for clarity', cls: 'bg-amber-100 text-amber-700' }
+
 export default function History() {
     const navigate = useNavigate()
     const [runs, setRuns] = useState(null)
@@ -26,11 +31,6 @@ export default function History() {
     if (error) return <ErrorBanner message={error} />
     if (!runs) return <Spinner />
 
-    const totalSaved = runs.reduce(
-        (sum, r) => sum + (r.tokensSaved ?? r.tokensBefore - r.tokensAfter),
-        0
-    )
-
     if (runs.length === 0) {
         return (
             <div className="rounded-lg border bg-white p-8 text-center">
@@ -40,11 +40,21 @@ export default function History() {
         )
     }
 
+    const totalSaved = runs.reduce(
+        (sum, r) => sum + (r.tokensSaved ?? r.tokensBefore - r.tokensAfter),
+        0
+    )
+
+    const longRuns = runs.filter((r) => r.tokensBefore > 100)
+    const avgLong = longRuns.length
+        ? (longRuns.reduce((s, r) => s + Number(r.percentSaved ?? 0), 0) / longRuns.length).toFixed(1)
+        : null
+
     return (
         <div className="space-y-4">
             <h1 className="text-2xl font-bold text-gray-900">History</h1>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div className="rounded-lg border bg-white p-4">
                     <p className="text-xs uppercase tracking-wide text-gray-500">Runs</p>
                     <p className="mt-1 text-2xl font-bold text-gray-900">{runs.length}</p>
@@ -52,6 +62,14 @@ export default function History() {
                 <div className="rounded-lg border bg-white p-4">
                     <p className="text-xs uppercase tracking-wide text-gray-500">Total tokens saved</p>
                     <p className="mt-1 text-2xl font-bold text-gray-900">{totalSaved}</p>
+                </div>
+                <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+                    <p className="text-xs uppercase tracking-wide text-gray-500">
+                        Avg savings, prompts over 100 tokens
+                    </p>
+                    <p className="mt-1 text-2xl font-bold text-green-600">
+                        {avgLong !== null ? `${avgLong}%` : '—'}
+                    </p>
                 </div>
             </div>
 
@@ -72,6 +90,7 @@ export default function History() {
                     <tbody className="divide-y">
                         {runs.map((r) => {
                             const percent = Number(r.percentSaved ?? 0)
+                            const b = badge(percent)
                             return (
                                 <tr
                                     key={r.id}
@@ -92,8 +111,13 @@ export default function History() {
                                     </td>
                                     <td className="px-4 py-3 text-right">{r.tokensBefore}</td>
                                     <td className="px-4 py-3 text-right">{r.tokensAfter}</td>
-                                    <td className={`px-4 py-3 text-right font-semibold ${percent > 0 ? 'text-green-600' : 'text-amber-600'}`}>
-                                        {percent.toFixed(1)}%
+                                    <td className="whitespace-nowrap px-4 py-3 text-right">
+                                        <span className={`font-semibold ${percent > 0 ? 'text-green-600' : 'text-amber-600'}`}>
+                                            {percent.toFixed(1)}%
+                                        </span>
+                                        <span className={`ml-2 rounded-full px-2 py-0.5 text-xs font-medium ${b.cls}`}>
+                                            {b.text}
+                                        </span>
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-3 text-gray-500">
                                         {new Date(r.createdAt).toLocaleString()}
