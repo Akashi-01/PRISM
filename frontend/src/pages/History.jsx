@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { listPrompts, getErrorMessage } from '../api/prompts'
 import Spinner from '../components/Spinner'
 import ErrorBanner from '../components/ErrorBanner'
+import TokenSavingsChart from '../components/TokenSavingsChart'
 
 export default function History() {
     const navigate = useNavigate()
@@ -25,6 +26,11 @@ export default function History() {
     if (error) return <ErrorBanner message={error} />
     if (!runs) return <Spinner />
 
+    const totalSaved = runs.reduce(
+        (sum, r) => sum + (r.tokensSaved ?? r.tokensBefore - r.tokensAfter),
+        0
+    )
+
     if (runs.length === 0) {
         return (
             <div className="rounded-lg border bg-white p-8 text-center">
@@ -37,6 +43,19 @@ export default function History() {
     return (
         <div className="space-y-4">
             <h1 className="text-2xl font-bold text-gray-900">History</h1>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-lg border bg-white p-4">
+                    <p className="text-xs uppercase tracking-wide text-gray-500">Runs</p>
+                    <p className="mt-1 text-2xl font-bold text-gray-900">{runs.length}</p>
+                </div>
+                <div className="rounded-lg border bg-white p-4">
+                    <p className="text-xs uppercase tracking-wide text-gray-500">Total tokens saved</p>
+                    <p className="mt-1 text-2xl font-bold text-gray-900">{totalSaved}</p>
+                </div>
+            </div>
+
+            <TokenSavingsChart runs={runs} />
 
             <div className="overflow-x-auto rounded-lg border bg-white">
                 <table className="w-full text-left text-sm">
