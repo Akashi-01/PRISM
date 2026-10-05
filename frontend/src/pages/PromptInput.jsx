@@ -1,24 +1,23 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { analyzePrompt } from '../src/api/prompts'
+import { analyzePrompt } from '../api/prompts'
 import Spinner from '../components/Spinner'
 import ErrorBanner from '../components/ErrorBanner'
 
 export default function PromptInput() {
+    const navigate = useNavigate()          // 1. call the hook at the top of the component
     const [prompt, setPrompt] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    const navigate = useNavigate()
 
     const handleSubmit = async () => {
-        if (loading || !prompt.trim()) return
         setLoading(true)
         setError('')
         try {
-            const run = await analyzePrompt(prompt.trim())
-            navigate(`/results/${run.id}`)
+            const result = await analyzePrompt(prompt)
+            navigate(`/results/${result.id}`)   // 2. redirect after a successful call
         } catch (err) {
-            setError(err.response?.data?.error || err.message || 'Something went wrong')
+            setError(err.response?.data?.error || 'Something went wrong')
         } finally {
             setLoading(false)
         }
