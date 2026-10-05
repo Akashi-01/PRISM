@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import PromptInput from '../pages/PromptInput'
-import Results from '../pages/Results'
-import History from '../pages/History'
+import Navbar from './components/Navbar'
+import PromptInput from './pages/PromptInput'
+import Results from './pages/Results'
+import History from './pages/History'
 
 export default function App() {
   return (
