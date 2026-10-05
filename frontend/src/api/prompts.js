@@ -10,3 +10,8 @@ export const getPrompt = (id) =>
 
 export const listPrompts = () =>
   api.get('/prompts').then((res) => res.data.data)
+
+export function getErrorMessage(err, fallback = 'Something went wrong') {
+  if (!err.response) return 'Cannot reach the server. Is the backend running?'
+  return err.response.data?.error || fallback
+}

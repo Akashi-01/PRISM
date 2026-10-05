@@ -18,14 +18,6 @@ function toText(v) {
     return String(v)
 }
 
-// Turn any value into a list of strings
-function toList(v) {
-    if (v == null) return []
-    if (Array.isArray(v)) return v.map(toText).filter(Boolean)
-    if (typeof v === 'object') return Object.entries(v).map(([k, val]) => `${k}: ${toText(val)}`)
-    return [toText(v)].filter(Boolean)
-}
-
 // Accept camelCase or snake_case keys
 const pick = (a, ...keys) => keys.map((k) => a[k]).find((v) => v !== undefined)
 
@@ -114,11 +106,3 @@ function Block({ title, children }) {
     )
 }
 
-function List({ items, empty }) {
-    if (!items.length) return <p className="text-sm text-gray-400">{empty}</p>
-    return (
-        <ul className="list-disc space-y-1 pl-5 text-gray-800 marker:text-indigo-500">
-            {items.map((item, i) => <li key={i}>{item}</li>)}
-        </ul>
-    )
-}

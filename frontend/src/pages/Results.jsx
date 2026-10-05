@@ -3,8 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import TokenSavingsCard from "../components/TokenSavingsCard";
 import PromptComparison from "../components/PromptComparison";
 import AnalysisPanel from "../components/AnalysisPanel";
-
-const API = import.meta.env.VITE_API_URL ?? "http://localhost:5000";
+import { getPrompt, getErrorMessage } from '../api/prompts'
 
 export default function ResultsPage() {
   const { id } = useParams();
@@ -13,26 +12,21 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
+  let cancelled = false
+  setLoading(true)
+  setError(null)
+  setRun(null)
 
-    fetch(`${API}/api/prompts/${id}`)
-      .then(async (res) => {
-        const body = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
-        return body.data;
-      })
-      .then((data) => !cancelled && setRun(data))
-      .catch((err) => {
-        if (cancelled) return;
-        // fetch throws TypeError when the backend is unreachable
-        setError(err instanceof TypeError ? "Cannot reach the server. Is the backend running?" : err.message);
-      })
-      .finally(() => !cancelled && setLoading(false));
+  getPrompt(id)
+    .then((data) => { if (!cancelled) setRun(data) })
+    .catch((err) => {
+      if (cancelled) return
+      setError(err.response?.status === 404 ? 'Run not found.' : getErrorMessage(err))
+    })
+    .finally(() => { if (!cancelled) setLoading(false) })
+  return () => { cancelled = true }
+}, [id]);
 
-    return () => { cancelled = true; };
-  }, [id]);
 
   if (loading) return <p className="p-8 text-gray-500">Loading run…</p>;
 
@@ -46,7 +40,7 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-5 p-6">
+    <div className="space-y-5">
       <header className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Run #{run.id}</h1>
