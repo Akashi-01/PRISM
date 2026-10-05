@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { analyzePrompt } from '../api/prompts'
+import { analyzePrompt, getErrorMessage} from '../api/prompts'
 import Spinner from '../components/Spinner'
 import ErrorBanner from '../components/ErrorBanner'
 
@@ -11,17 +11,18 @@ export default function PromptInput() {
     const [error, setError] = useState('')
 
     const handleSubmit = async () => {
-        setLoading(true)
-        setError('')
-        try {
-            const result = await analyzePrompt(prompt)
-            navigate(`/results/${result.id}`)   // 2. redirect after a successful call
-        } catch (err) {
-            setError(err.response?.data?.error || 'Something went wrong')
-        } finally {
-            setLoading(false)
-        }
+    if (loading || !prompt.trim()) return          // guard against double submits
+    setLoading(true)
+    setError('')
+    try {
+        const result = await analyzePrompt(prompt.trim())   // send trimmed text
+        navigate(`/results/${result.id}`)
+    } catch (err) {
+        setError(getErrorMessage(err))
+    } finally {
+        setLoading(false)
     }
+}
 
     return (
         <div className="space-y-4">

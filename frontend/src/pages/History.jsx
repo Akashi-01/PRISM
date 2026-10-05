@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { listPrompts } from '../api/prompts'
+import { Link, useNavigate } from 'react-router-dom'
+import { listPrompts, getErrorMessage } from '../api/prompts'
 import Spinner from '../components/Spinner'
 import ErrorBanner from '../components/ErrorBanner'
 
 export default function History() {
+    const navigate = useNavigate()
     const [runs, setRuns] = useState(null)
     const [error, setError] = useState('')
 
@@ -15,11 +16,7 @@ export default function History() {
             .then((res) => { if (!cancelled) setRuns(res) })
             .catch((err) => {
                 if (cancelled) return
-                setError(
-                    err.response
-                        ? err.response.data?.error || 'Could not load history'
-                        : 'Cannot reach the server. Is the backend running?'
-                )
+                setError(getErrorMessage(err, 'Could not load history'))
             })
 
         return () => { cancelled = true }
@@ -57,9 +54,17 @@ export default function History() {
                         {runs.map((r) => {
                             const percent = Number(r.percentSaved ?? 0)
                             return (
-                                <tr key={r.id} className="hover:bg-gray-50">
+                                <tr
+                                    key={r.id}
+                                    onClick={() => navigate(`/results/${r.id}`)}
+                                    className="cursor-pointer hover:bg-gray-50"
+                                >
                                     <td className="px-4 py-3">
-                                        <Link to={`/results/${r.id}`} className="font-medium text-indigo-600 hover:underline">
+                                        <Link
+                                            to={`/results/${r.id}`}
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="font-medium text-indigo-600 hover:underline"
+                                        >
                                             #{r.id}
                                         </Link>
                                     </td>
