@@ -11,7 +11,8 @@
     "test:gemini": "tsx src/scripts/testGemini.ts",
     "test:analyze": "tsx src/scripts/testAnalyze.ts",
     "test:pipeline": "tsx src/scripts/testPipeline.ts",
-    "test:demo": "tsx src/scripts/testDemo.ts"
+    "test:demo": "tsx src/scripts/testDemo.ts",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +32,8 @@
     "@types/node": "^26.6.3",
     "prisma": "^7.10.0",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
   }
 }

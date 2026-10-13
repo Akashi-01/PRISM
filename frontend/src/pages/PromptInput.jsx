@@ -4,6 +4,7 @@ import { analyzePrompt, getErrorMessage} from '../api/prompts';
 import Spinner from '../components/Spinner';
 import ErrorBanner from '../components/ErrorBanner';
 import LoadingStages from "../components/LoadingStages";
+import { useElapsed } from '../hooks/useElapsed';
 
 
 const SAMPLES = [
@@ -26,6 +27,7 @@ export default function PromptInput() {
     const [prompt, setPrompt] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const elapsed = useElapsed(loading)
 
     const handleSubmit = async () => {
     if (loading || !prompt.trim()) return          // guard against double submits
@@ -79,10 +81,10 @@ export default function PromptInput() {
                 <span className="text-xs text-gray-500">{prompt.length} characters</span>
                 <button
                     onClick={handleSubmit}
-                    disabled={loading || !prompt.trim()}
+                    disabled={loading || prompt.trim().length < 10}
                     className="rounded-md bg-indigo-600 px-5 py-2 text-white font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {loading ? 'Working…' : 'Analyze & Optimize'}
+                    {loading ? `Working… ${elapsed}s` : 'Analyze & Optimize'}
                 </button>
             </div>
 
