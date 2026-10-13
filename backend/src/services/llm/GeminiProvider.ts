@@ -2,6 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { z } from "zod";
 import { env } from "../../config/env";
 import type { LLMService, LLMResult, GenerateJSONArgs, TokenUsage } from "./LLMService";
+import { withRetry, isRetryable } from "../../utils/withRetry";
 
 export class LLMError extends Error {
   constructor(message: string, public cause?: unknown) {
@@ -10,48 +11,8 @@ export class LLMError extends Error {
   }
 }
 
-class TimeoutError extends Error {
-  constructor(ms: number) {
-    super(`LLM call timed out after ${ms}ms`);
-    this.name = "TimeoutError";
-  }
-}
-
 const TIMEOUT_MS = Number(process.env.LLM_TIMEOUT_MS ?? 40000);
 const MAX_ATTEMPTS = Number(process.env.LLM_MAX_ATTEMPTS ?? 3);
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-function isRetryable(err: any): boolean {
-  if (err instanceof TimeoutError) return true;
-  if ([429, 500, 503, 504].includes(Number(err?.status))) return true;
-  return /ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|fetch failed|UNAVAILABLE|RESOURCE_EXHAUSTED/i.test(
-    String(err?.message ?? "")
-  );
-}
-
-// Per-attempt timeout + exponential backoff with jitter. Retries only transient errors.
-async function withRetry<T>(
-  fn: (signal: AbortSignal) => Promise<T>,
-  attempts = MAX_ATTEMPTS,
-  label = "llm"
-): Promise<T> {
-  for (let attempt = 1; ; attempt++) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-    try {
-      return await fn(controller.signal);
-    } catch (e) {
-      const err = controller.signal.aborted ? new TimeoutError(TIMEOUT_MS) : e;
-      if (attempt >= attempts || !isRetryable(err)) throw err;
-      const delay = 1000 * 2 ** (attempt - 1) + Math.random() * 300;
-      console.warn(`[${label}] attempt ${attempt} failed, retrying in ${Math.round(delay)}ms`);
-      await sleep(delay);
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-}
 
 export class GeminiProvider implements LLMService {
   private ai: GoogleGenAI;
@@ -131,7 +92,8 @@ export class GeminiProvider implements LLMService {
       withRetry(
         (signal) => this.callOnce(model, systemPrompt, userPrompt, schema, stage, maxOutputTokens, signal),
         attempts,
-        stage
+        stage,
+        { timeoutMs: TIMEOUT_MS }
       );
 
     try {
@@ -191,7 +153,8 @@ export class GeminiProvider implements LLMService {
             config: { abortSignal: signal },
           }),
         MAX_ATTEMPTS,
-        "countTokens"
+        "countTokens",
+        { timeoutMs: TIMEOUT_MS }
       );
       return res.totalTokens ?? 0;
     } catch (err) {
