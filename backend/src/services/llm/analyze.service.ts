@@ -1,8 +1,6 @@
 import { AnalysisSchema } from "../../schemas/analysis.schema";
 import { ANALYZE_SYSTEM, buildAnalyzeInput } from "../../prompts/analyze.prompt";
-import { GeminiProvider } from "./GeminiProvider";
-
-const llm = new GeminiProvider();
+import { llm } from "./index";
 
 export async function analyzePrompt(rawPrompt: string) {
   const runOnce = () =>
@@ -10,6 +8,7 @@ export async function analyzePrompt(rawPrompt: string) {
       systemPrompt: ANALYZE_SYSTEM,
       userPrompt: buildAnalyzeInput(rawPrompt),
       schema: AnalysisSchema,
+      stage: "analyze",
     });
 
   for (let attempt = 0; attempt < 2; attempt++) {

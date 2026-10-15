@@ -1,9 +1,7 @@
 import { OptimizationSchema } from "../../schemas/optimization.schema";
 import type { Analysis } from "../../schemas/analysis.schema";
 import { OPTIMIZE_SYSTEM, buildOptimizeInput } from "../../prompts/optimize.prompt";
-import { GeminiProvider } from "./GeminiProvider";
-
-const llm = new GeminiProvider();
+import { llm } from "./index";
 
 export async function optimizePrompt(rawPrompt: string, analysis: Analysis) {
   const runOnce = () =>
@@ -11,6 +9,7 @@ export async function optimizePrompt(rawPrompt: string, analysis: Analysis) {
       systemPrompt: OPTIMIZE_SYSTEM,
       userPrompt: buildOptimizeInput(rawPrompt, analysis),
       schema: OptimizationSchema,
+      stage: "optimize",
     });
 
   for (let attempt = 0; attempt < 2; attempt++) {
