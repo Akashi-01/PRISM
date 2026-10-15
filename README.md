@@ -37,6 +37,7 @@ Like its namesake, PRISM takes a single beam of raw input and separates it into 
 - **Prompt Refinement**: Rewrites raw prompts to be clearer, more specific, and more complete without changing the user's goal.
 - **Intent Structuring**: Extracts and organizes intent into well-defined components such as task, context, constraints, and desired output format.
 - **Metrics & Evaluation**: Quantifies prompt quality and efficiency so improvements can be measured instead of assumed.
+- **Web Interface**: A frontend where users enter a prompt and view the refined prompt, structured intent, and quality metrics.
 - **Backend Service**: A modular backend that exposes the refinement pipeline for integration into applications and workflows.
 
 ## How It Works
@@ -62,7 +63,7 @@ Like its namesake, PRISM takes a single beam of raw input and separates it into 
 
 ## Architecture
 
-PRISM is organized around three cooperating stages:
+PRISM is a two-part application: a **backend** that runs the processing pipeline and a **frontend** that lets users interact with it. The backend is organized around three cooperating stages:
 
 1. **Intent Structuring**: parses the incoming prompt into a structured representation of what the user actually wants.
 2. **Prompt Refinement**: uses that structure to produce an improved prompt ready to send to any LLM.
@@ -73,6 +74,7 @@ PRISM is organized around three cooperating stages:
 ```
 PRISM/
 ├── backend/        # Core services: intent structuring, refinement, metrics
+├── frontend/       # Web interface for submitting prompts and viewing results
 ├── .gitignore
 └── README.md
 ```
@@ -90,29 +92,40 @@ PRISM/
 ```bash
 # Clone the repository
 git clone https://github.com/Akashi-01/PRISM.git
-cd PRISM/backend
+cd PRISM
 
-# Install dependencies
+# Backend dependencies
+cd backend
 # TODO: replace with your actual command, e.g.
 # pip install -r requirements.txt
+cd ..
+
+# Frontend dependencies
+cd frontend
+# TODO: replace with your actual command, e.g.
 # npm install
+cd ..
 ```
 
 ### Configuration
 
-Create a `.env` file in `backend/` (never commit this file):
+Create a `.env` file in `backend/` (and in `frontend/` if it needs one) (never commit this file):
 
 ```env
 # TODO: list the variables your project needs, for example:
 # LLM_API_KEY=your_api_key_here
 ```
 
-### Running the Backend
+### Running the Application
 
 ```bash
-# TODO: replace with your actual start command, e.g.
-# python main.py
-# npm start
+# Terminal 1: backend
+cd backend
+# TODO: add your start command
+
+# Terminal 2: frontend
+cd frontend
+# TODO: add your start command, e.g. npm run dev
 ```
 
 ## Usage
@@ -159,12 +172,12 @@ PRISM evaluates prompts along dimensions such as:
 
 ## Roadmap
 
--  Project foundation and backend scaffold
+-  Project foundation, backend, and frontend scaffold
 -  Intent structuring pipeline
 -  Prompt refinement engine
 -  Metrics and evaluation module
 -  REST API documentation
--  Frontend / UI
+-  Frontend / UI polish and deployment
 -  Support for multiple LLM providers
 -  Automated tests and CI
 
@@ -188,9 +201,7 @@ GitHub: [@Akashi-01](https://github.com/Akashi-01)
 ---
 
 <div align="center">
-
 If you find PRISM useful, consider giving it a star.
-
 </div>
 
 If you find PRISM useful, consider giving it a star.
