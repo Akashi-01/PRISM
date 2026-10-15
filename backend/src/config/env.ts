@@ -9,6 +9,9 @@ const envSchema = z.object({
     GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
     GEMINI_MODEL: z.string().default("gemini-3.5-flash"),
     GEMINI_FALLBACK_MODEL: z.string().optional(),
+    GROQ_API_KEY: z.string().optional(),
+    GROQ_MODEL: z.string().default("llama-3.3-70b-versatile"),
+    GROQ_FALLBACK_MODEL: z.string().optional(),
     LLM_PROVIDER: z.enum(["gemini", "groq"]).default("gemini"),
 });
 

@@ -1,9 +1,8 @@
 import { analyzePrompt } from "../services/llm/analyze.service";
 import { optimizePrompt } from "../services/llm/optimize.service";
-import { GeminiProvider } from "../services/llm/GeminiProvider";
+import { llm } from "../services/llm";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const llm = new GeminiProvider();
 
 const prompts = [
   "write code for login",

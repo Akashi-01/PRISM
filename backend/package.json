@@ -24,6 +24,8 @@
     "cors": "^2.8.6",
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
+    "groq-sdk": "^1.6.0",
+    "js-tiktoken": "^1.0.21",
     "zod": "^4.6.5"
   },
   "devDependencies": {

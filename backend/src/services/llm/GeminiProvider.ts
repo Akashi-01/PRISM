@@ -97,7 +97,8 @@ export class GeminiProvider implements LLMService {
       );
 
     try {
-      return { response: await run(this.model, MAX_ATTEMPTS), usedModel: this.model };
+      const primaryAttempts = env.GEMINI_FALLBACK_MODEL ? 1 : MAX_ATTEMPTS;
+      return { response: await run(this.model, primaryAttempts), usedModel: this.model };
     } catch (err: any) {
       if (isRetryable(err) && env.GEMINI_FALLBACK_MODEL) {
         console.warn(`[${stage}] primary failed, using fallback model`);
@@ -138,7 +139,7 @@ export class GeminiProvider implements LLMService {
     const u = response.usageMetadata;
     console.log(
       `[${stage}] call ${((Date.now() - t0) / 1000).toFixed(1)}s in=${u?.promptTokenCount} ` +
-        `out=${u?.candidatesTokenCount} thoughts=${u?.thoughtsTokenCount ?? 0} model=${model}`
+      `out=${u?.candidatesTokenCount} thoughts=${u?.thoughtsTokenCount ?? 0} model=${model}`
     );
     return response;
   }
