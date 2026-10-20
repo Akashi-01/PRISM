@@ -21,8 +21,42 @@ function toText(v) {
 // Accept camelCase or snake_case keys
 const pick = (a, ...keys) => keys.map((k) => a[k]).find((v) => v !== undefined)
 
+// Convert the staged-pipeline shape into the shape this panel renders.
+// Old runs (already arrays) pass through unchanged.
+function normalizeAnalysis(a) {
+    const out = { ...a }
+
+    // intent: show the goal as the summary text next to the category badge
+    if (a.intent && !a.intent.summary && a.intent.primaryGoal) {
+        out.intent = { ...a.intent, summary: a.intent.primaryGoal }
+    }
+
+    // requirements: { explicit: [], implicit: [] } -> [{ type, text }]
+    if (a.requirements && !Array.isArray(a.requirements)) {
+        out.requirements = [
+            ...(a.requirements.explicit ?? []).map((text) => ({ type: 'explicit', text })),
+            ...(a.requirements.implicit ?? []).map((text) => ({ type: 'implicit', text })),
+        ]
+    }
+
+    // missing info: { items: [{ question, importance }] } -> [{ item, why }]
+    if (a.missingInfo && !Array.isArray(a.missingInfo) && Array.isArray(a.missingInfo.items)) {
+        out.missingInfo = a.missingInfo.items.map((m) => ({
+            item: m.question,
+            why: m.importance ? `Importance: ${m.importance}` : undefined,
+        }))
+    }
+
+    // redundancy: { items: [{ text, reason }] } -> array under redundancyFlags
+    if (a.redundancy && !Array.isArray(a.redundancy) && Array.isArray(a.redundancy.items)) {
+        out.redundancyFlags = a.redundancy.items
+    }
+
+    return out
+}
+
 export default function AnalysisPanel({ analysis }) {
-    const a = parse(analysis)
+    const a = normalizeAnalysis(parse(analysis))
     const intent = pick(a, 'intent') ?? {}
     const requirements = Array.isArray(pick(a, 'requirements')) ? pick(a, 'requirements') : []
     const missing = Array.isArray(pick(a, 'missingInfo', 'missing_info')) ? pick(a, 'missingInfo', 'missing_info') : []
@@ -105,4 +139,3 @@ function Block({ title, children }) {
         </div>
     )
 }
-

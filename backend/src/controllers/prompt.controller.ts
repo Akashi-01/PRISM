@@ -26,6 +26,7 @@ export async function analyzeController(req: Request, res: Response, next: NextF
 export async function listController(_req: Request, res: Response, next: NextFunction) {
   try {
     const data = await prisma.promptSession.findMany({
+      where: { optimizedPrompt: { not: null } },
       orderBy: { createdAt: "desc" },
       take: 50,
     });
@@ -42,7 +43,10 @@ export async function getByIdController(req: Request, res: Response, next: NextF
       return res.status(400).json({ success: false, error: "Invalid id" });
     }
 
-    const data = await prisma.promptSession.findUnique({ where: { id } });
+    const data = await prisma.promptSession.findUnique({
+      where: { id },
+      include: { stages: { orderBy: { id: "asc" } } },
+    });
     if (!data) {
       return res.status(404).json({ success: false, error: "Not found" });
     }
