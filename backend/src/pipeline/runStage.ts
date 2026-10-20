@@ -5,7 +5,7 @@ import type { PipelineContext, StageDef } from "./types";
 export async function runStage<T>(
   stage: StageDef<T>,
   ctx: PipelineContext,
-  maxAttempts = 2
+  maxAttempts = 1
 ): Promise<LLMResult<T>> {
   let lastError: unknown;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
