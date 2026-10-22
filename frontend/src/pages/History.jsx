@@ -88,9 +88,10 @@ export default function History() {
                         </tr>
                     </thead>
                     <tbody className="divide-y">
-                        {runs.map((r) => {
+                        {runs.map((r, idx) => {
                             const percent = Number(r.percentSaved ?? 0)
                             const b = badge(percent)
+                            const runNumber = runs.length - idx
                             return (
                                 <tr
                                     key={r.id}
@@ -103,7 +104,7 @@ export default function History() {
                                             onClick={(e) => e.stopPropagation()}
                                             className="font-medium text-indigo-600 hover:underline"
                                         >
-                                            #{r.id}
+                                            #{runNumber}
                                         </Link>
                                     </td>
                                     <td className="max-w-xs truncate px-4 py-3 text-gray-700" title={r.rawPrompt}>
