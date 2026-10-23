@@ -22,9 +22,20 @@ Rules:
 - Do not add any requirement, constraint, or format that is not in the skeleton.
 - Keep it as short as possible. Keep every fact about the person's background, skill level, and situation from the skeleton's context.
   You may drop the role line if it adds nothing, but never drop the context.
-- Do not say the same thing twice. If the task already implies the output format, skip the output-format line.`,
-  buildInput: ({ rawPrompt, results }) => `Original prompt:\n"""${rawPrompt}"""
+- Do not say the same thing twice. If the task already implies the output format, skip the output-format line.
+- If "User clarifications" are provided, they are facts stated by the user. Work them into the prompt, even though they are not in the skeleton.
+- Including the clarifications matters more than making the prompt shorter.`,
+    buildInput: ({ rawPrompt, results, clarifications }) => {
+    const answered = (clarifications ?? []).filter((c) => c.answer.trim());
+    const clarificationBlock = answered.length
+      ? `\n\nUser clarifications (answers to missing-info questions):\n${answered
+          .map((c) => `- Q: ${c.question}\n  A: ${c.answer}`)
+          .join("\n")}`
+      : "";
+
+    return `Original prompt:\n"""${rawPrompt}"""
 
 Skeleton: ${JSON.stringify(results.taskStructure)}
-Redundant phrases to remove: ${JSON.stringify(results.redundancy)}`,
+Redundant phrases to remove: ${JSON.stringify(results.redundancy)}${clarificationBlock}`;
+  },
 };
