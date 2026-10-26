@@ -74,7 +74,7 @@ export async function runPipeline(
   for (const stage of toRun) {
     const startedAt = Date.now();
     try {
-      const result = await runStage(stage as any, ctx);
+      const result = await runStage(stage as any, ctx, stage.name === "optimize" ? 2 : 1);
 
       // Guard 1: drop any "redundant phrase" that isn't really in the raw prompt
       if (stage.name === "redundancy") {

@@ -1,20 +1,31 @@
 import { describe, it, expect } from "vitest";
 import { OptimizationSchema } from "./optimization.schema";
 
-describe("OptimizationSchema", () => {
-  it("accepts a valid optimization", () => {
-    const r = OptimizationSchema.safeParse({
-      optimizedPrompt: "Write a polite leave email to my manager.",
-      changes: ["Removed filler", "Kept the tone"],
-    });
-    expect(r.success).toBe(true);
+const parse = (optimizedPrompt: string) =>
+  OptimizationSchema.safeParse({ optimizedPrompt, changes: [] });
+
+describe("OptimizationSchema: third-person author check", () => {
+  it("rejects 'the user wants ...'", () => {
+    expect(parse("The user wants a signup page.").success).toBe(false);
   });
 
-  it("rejects a missing changes list", () => {
-    expect(OptimizationSchema.safeParse({ optimizedPrompt: "x" }).success).toBe(false);
+  it("rejects 'the user is a beginner'", () => {
+    expect(parse("The user is a beginner who needs help.").success).toBe(false);
   });
 
-  it("rejects a non-string optimizedPrompt", () => {
-    expect(OptimizationSchema.safeParse({ optimizedPrompt: 5, changes: [] }).success).toBe(false);
+  it("rejects 'the user's goal'", () => {
+    expect(parse("Help with the user's goal of building a site.").success).toBe(false);
+  });
+
+  it("allows product wording like 'the user's email'", () => {
+    expect(parse("Design a signup page that validates the user's email.").success).toBe(true);
+  });
+
+  it("allows 'when the user submits the form'", () => {
+    expect(parse("Show an error when the user submits an empty form.").success).toBe(true);
+  });
+
+  it("rejects an empty prompt", () => {
+    expect(parse("").success).toBe(false);
   });
 });

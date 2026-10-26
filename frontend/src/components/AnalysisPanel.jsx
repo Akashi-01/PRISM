@@ -59,7 +59,6 @@ export default function AnalysisPanel({ analysis }) {
     const a = normalizeAnalysis(parse(analysis))
     const intent = pick(a, 'intent') ?? {}
     const requirements = Array.isArray(pick(a, 'requirements')) ? pick(a, 'requirements') : []
-    const missing = Array.isArray(pick(a, 'missingInfo', 'missing_info')) ? pick(a, 'missingInfo', 'missing_info') : []
     const redundancy = Array.isArray(pick(a, 'redundancyFlags', 'redundancy_flags', 'redundancies'))
     ? pick(a, 'redundancyFlags', 'redundancy_flags', 'redundancies')
     : []
@@ -97,20 +96,6 @@ export default function AnalysisPanel({ analysis }) {
                     )}
                 </Block>
 
-                <Block title="Missing info">
-                    {missing.length === 0 ? (
-                        <p className="text-sm text-gray-400">Nothing missing</p>
-                    ) : (
-                        <ul className="space-y-2">
-                            {missing.map((m, i) => (
-                                <li key={i} className="rounded border-l-4 border-amber-400 bg-amber-50 px-3 py-2">
-                                    <p className="font-medium text-gray-900">{toText(m.item ?? m)}</p>
-                                    {m.why && <p className="text-sm text-gray-600">{toText(m.why)}</p>}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </Block>
 
                 <Block title="Redundancy flags">
                     {redundancy.length === 0 ? (

@@ -14,7 +14,7 @@ Rules:
 - Remove the listed redundant phrases.
 - Keep every requirement from the original prompt.
 - Do not add technologies or requirements that are not in the skeleton.
-- Keep any [placeholder] from the skeleton as it is.
+- - Keep any [placeholder] from the skeleton as it is, unless one of my answers fills it. In that case, replace the placeholder with my answer.
 - The result must be shorter than the original whenever possible.
 - Write the prompt in the same voice as the original prompt (usually first person, "I want...", "Help me...").
   Never write "the user". Give the model its role in a single short sentence if useful.
@@ -23,12 +23,12 @@ Rules:
 - Keep it as short as possible. Keep every fact about the person's background, skill level, and situation from the skeleton's context.
   You may drop the role line if it adds nothing, but never drop the context.
 - Do not say the same thing twice. If the task already implies the output format, skip the output-format line.
-- If "User clarifications" are provided, they are facts stated by the user. Work them into the prompt, even though they are not in the skeleton.
-- Including the clarifications matters more than making the prompt shorter.`,
-    buildInput: ({ rawPrompt, results, clarifications }) => {
+- If "Answers I gave to clarifying questions" are provided, they are facts about me. Work them into the prompt in first person ("I am...", "I need..."), even though they are not in the skeleton.
+- Never write "the user", "the person" or "they" for the author of the prompt. Including my answers matters more than making the prompt shorter.`,
+      buildInput: ({ rawPrompt, results, clarifications }) => {
     const answered = (clarifications ?? []).filter((c) => c.answer.trim());
     const clarificationBlock = answered.length
-      ? `\n\nUser clarifications (answers to missing-info questions):\n${answered
+      ? `\n\nAnswers I gave to clarifying questions (my own words, first person):\n${answered
           .map((c) => `- Q: ${c.question}\n  A: ${c.answer}`)
           .join("\n")}`
       : "";
