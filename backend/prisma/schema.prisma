@@ -25,6 +25,8 @@ model PromptSession {
   model           String?
   latencyMs       Int?
   createdAt       DateTime @default(now())
+  clarifications  Json?
+  currentRun      Int      @default(1)
   stages          StageResult[]
 }
 
@@ -41,8 +43,10 @@ model StageResult {
   provider     String?
   model        String?
   createdAt    DateTime      @default(now())
+  runNumber    Int           @default(1)
+  isCurrent    Boolean       @default(true)
 
   session      PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
-  @@index([sessionId, stage])
+  @@index([sessionId, stage, isCurrent])
 }
