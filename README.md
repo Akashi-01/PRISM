@@ -84,8 +84,6 @@ PRISM/
 ### Prerequisites
 
 - Git
-- <!-- TODO: add runtime, e.g. Python 3.10+ / Node.js 18+ -->
-- <!-- TODO: add LLM provider access if required, e.g. an API key -->
 
 ### Installation
 
