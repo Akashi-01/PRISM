@@ -62,7 +62,12 @@ export async function getByIdController(req: Request, res: Response, next: NextF
     if (!data) {
       return res.status(404).json({ success: false, error: "Not found" });
     }
-    res.json({ success: true, data });
+
+    const runNumber = await prisma.promptSession.count({
+      where: { optimizedPrompt: { not: null }, id: { lte: id } },
+    });
+
+    res.json({ success: true, data: Object.assign({}, data, { runNumber }) });
   } catch (err) {
     next(err);
   }
