@@ -201,7 +201,3 @@ GitHub: [@Akashi-01](https://github.com/Akashi-01)
 <div align="center">
 If you find PRISM useful, consider giving it a star.
 </div>
-
-If you find PRISM useful, consider giving it a star.
-
-</div>
