@@ -7,6 +7,8 @@ import {
   getStageController,
   answersController,
   rerunController,
+  evaluateController,
+  getEvaluationController,
 } from "../controllers/prompt.controller";
 
 const router = Router();
@@ -18,5 +20,7 @@ router.get("/:id/stages", listStagesController);
 router.get("/:id/stages/:stageName", getStageController);
 router.post("/:id/answers", answersController);
 router.post("/:id/rerun", rerunController);
+router.post("/:id/evaluate", evaluateController);
+router.get("/:id/evaluation", getEvaluationController);
 
 export default router;

@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { z } from "zod";
 import { env } from "../../config/env";
-import type { LLMService, LLMResult, GenerateJSONArgs, TokenUsage } from "./LLMService";
+import type { LLMService, LLMResult, GenerateJSONArgs, GenerateTextArgs, TokenUsage } from "./LLMService";
 import { withRetry, isRetryable } from "../../utils/withRetry";
 
 export class LLMError extends Error {
@@ -74,6 +74,70 @@ export class GeminiProvider implements LLMService {
     }
 
     throw new LLMError(`Gemini output invalid after repair attempt (${stage}): ${lastError}`);
+  }
+
+  // NEW: plain-text generation (no JSON, no schema)
+  async generateText(args: GenerateTextArgs): Promise<LLMResult<string>> {
+    const { systemPrompt, userPrompt, stage = "llm", maxOutputTokens = 2048 } = args;
+    const started = Date.now();
+
+    const call = (model: string, attempts: number) =>
+      withRetry(
+        async (signal) => {
+          const t0 = Date.now();
+          const response = await this.ai.models.generateContent({
+            model,
+            contents: userPrompt,
+            config: {
+              ...(systemPrompt ? { systemInstruction: systemPrompt } : {}),
+              temperature: 0.2,
+              maxOutputTokens,
+              abortSignal: signal,
+              thinkingConfig: { thinkingLevel: "low" } as any,
+            },
+          });
+          const u = response.usageMetadata;
+          console.log(
+            `[${stage}] call ${((Date.now() - t0) / 1000).toFixed(1)}s in=${u?.promptTokenCount} ` +
+            `out=${u?.candidatesTokenCount} model=${model}`
+          );
+          return response;
+        },
+        attempts,
+        stage,
+        { timeoutMs: TIMEOUT_MS }
+      );
+
+    let usedModel = this.model;
+    let response;
+    try {
+      response = await call(this.model, env.GEMINI_FALLBACK_MODEL ? 1 : MAX_ATTEMPTS);
+    } catch (err: any) {
+      if (isRetryable(err) && env.GEMINI_FALLBACK_MODEL) {
+        usedModel = env.GEMINI_FALLBACK_MODEL;
+        try {
+          response = await call(usedModel, 2);
+        } catch (err2) {
+          throw new LLMError("Gemini text call failed (primary and fallback)", err2);
+        }
+      } else {
+        throw new LLMError("Gemini text call failed", err);
+      }
+    }
+
+    const text = response.text;
+    if (!text) throw new LLMError(`Gemini returned empty text (${stage})`);
+    const u = response.usageMetadata;
+    return {
+      data: text,
+      usage: {
+        inputTokens: u?.promptTokenCount ?? 0,
+        outputTokens: u?.candidatesTokenCount ?? 0,
+        totalTokens: u?.totalTokenCount ?? 0,
+      },
+      model: usedModel,
+      latencyMs: Date.now() - started,
+    };
   }
 
   private repairPrompt(original: string, error: string): string {

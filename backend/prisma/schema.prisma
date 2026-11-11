@@ -28,6 +28,8 @@ model PromptSession {
   clarifications  Json?
   currentRun      Int      @default(1)
   stages          StageResult[]
+  evaluations         ResponseEvaluation[]
+  evaluationSummaries EvaluationSummary[]
 }
 
 model StageResult {
@@ -49,4 +51,50 @@ model StageResult {
   session      PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId, stage, isCurrent])
+}
+
+model ResponseEvaluation {
+  id                   Int      @id @default(autoincrement())
+  sessionId            Int
+  runNumber            Int
+  variant              String   // "original" | "optimized"
+  promptText           String   @db.Text
+  responseText         String   @db.LongText
+  genInputTokens       Int      @default(0)
+  genOutputTokens      Int      @default(0)
+  genLatencyMs         Int      @default(0)
+  genProvider          String
+  genModel             String
+  judgeProvider        String
+  judgeModel           String
+  relevance            Int
+  completeness         Int
+  instructionFollowing Int
+  formatCorrectness    Int
+  overallScore         Float
+  judgeRationale       String   @db.Text
+  isCurrent            Boolean  @default(true)
+  createdAt            DateTime @default(now())
+
+  session PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, isCurrent])
+}
+
+model EvaluationSummary {
+  id                  Int      @id @default(autoincrement())
+  sessionId           Int
+  runNumber           Int
+  qualityOriginal     Float
+  qualityOptimized    Float
+  qualityDelta        Float
+  qualityRetentionPct Float
+  tokensSavedPct      Float
+  hasClarifications   Boolean  @default(false)
+  isCurrent           Boolean  @default(true)
+  createdAt           DateTime @default(now())
+
+  session PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, isCurrent])
 }

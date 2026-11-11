@@ -3,17 +3,26 @@ import type { LLMService } from "./LLMService";
 import { GeminiProvider } from "./GeminiProvider";
 import { GroqProvider } from "./GroqProvider";
 
-function createProvider(): LLMService {
-  switch (env.LLM_PROVIDER) {
-    case "gemini":
-      return new GeminiProvider();
-    case "groq":
-      return new GroqProvider();
-    default:
-      throw new Error(`Unknown LLM_PROVIDER: ${env.LLM_PROVIDER}`);
+const cache = new Map<string, LLMService>();
+
+export function getProvider(name: string): LLMService {
+  const cached = cache.get(name);
+  if (cached) return cached;
+  let p: LLMService;
+  switch (name) {
+    case "gemini": p = new GeminiProvider(); break;
+    case "groq": p = new GroqProvider(); break;
+    default: throw new Error(`Unknown provider: ${name}`);
   }
+  cache.set(name, p);
+  return p;
 }
 
-console.log(`[llm] provider=${env.LLM_PROVIDER}`);
+export const GENERATOR_PROVIDER = process.env.GENERATOR_PROVIDER ?? env.LLM_PROVIDER;
+export const JUDGE_PROVIDER = process.env.JUDGE_PROVIDER ?? env.LLM_PROVIDER;
 
-export const llm: LLMService = createProvider();
+console.log(`[llm] pipeline=${env.LLM_PROVIDER} generator=${GENERATOR_PROVIDER} judge=${JUDGE_PROVIDER}`);
+
+export const llm = getProvider(env.LLM_PROVIDER);          // pipeline stages (unchanged)
+export const generatorLLM = getProvider(GENERATOR_PROVIDER);
+export const judgeLLM = getProvider(JUDGE_PROVIDER);

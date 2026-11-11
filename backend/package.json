@@ -12,7 +12,8 @@
     "test:analyze": "tsx src/scripts/testAnalyze.ts",
     "test:pipeline": "tsx src/scripts/testPipeline.ts",
     "test:demo": "tsx src/scripts/testDemo.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:evaluate": "tsx src/scripts/testEvaluate.ts"
   },
   "keywords": [],
   "author": "",
