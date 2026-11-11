@@ -1,7 +1,66 @@
 {
   "v": 12,
   "name": "PRISM",
-  "folders": [],
+  "folders": [
+    {
+      "v": 12,
+      "name": "Evaluation",
+      "folders": [],
+      "requests": [
+        {
+          "v": "17",
+          "endpoint": "http://localhost:5000/api/prompts/72/evaluate",
+          "name": "evaluate test run",
+          "params": [],
+          "headers": [],
+          "method": "POST",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "preRequestScript": "",
+          "testScript": "",
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        },
+        {
+          "v": "17",
+          "endpoint": "http://localhost:5000/api/prompts/72/evaluation",
+          "name": "evaluation run",
+          "params": [],
+          "headers": [],
+          "method": "GET",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "preRequestScript": "",
+          "testScript": "",
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {},
+          "description": null
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "description": null,
+      "preRequestScript": "",
+      "testScript": ""
+    }
+  ],
   "requests": [
     {
       "v": "17",
@@ -110,17 +169,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/analyze",
       "name": "Analyze",
+      "method": "POST",
+      "endpoint": "http://localhost:5000/api/prompts/analyze",
       "params": [],
       "headers": [],
-      "method": "POST",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": "application/json",
         "body": "{ \"prompt\": \"I want to design a signup page\" }"
@@ -131,17 +190,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts",
       "name": "List runs",
+      "method": "GET",
+      "endpoint": "http://localhost:5000/api/prompts",
       "params": [],
       "headers": [],
-      "method": "GET",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": null,
         "body": null
@@ -152,17 +211,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67",
       "name": "Get run",
+      "method": "GET",
+      "endpoint": "http://localhost:5000/api/prompts/67",
       "params": [],
       "headers": [],
-      "method": "GET",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": null,
         "body": null
@@ -173,17 +232,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67/stages",
       "name": "Get stages",
+      "method": "GET",
+      "endpoint": "http://localhost:5000/api/prompts/67/stages",
       "params": [],
       "headers": [],
-      "method": "GET",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": null,
         "body": null
@@ -194,17 +253,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67/stages?history=true",
       "name": "Get stages (history)",
+      "method": "GET",
+      "endpoint": "http://localhost:5000/api/prompts/67/stages?history=true",
       "params": [],
       "headers": [],
-      "method": "GET",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": null,
         "body": null
@@ -215,17 +274,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67/stages/optimize",
       "name": "Get one stage",
+      "method": "GET",
+      "endpoint": "http://localhost:5000/api/prompts/67/stages/optimize",
       "params": [],
       "headers": [],
-      "method": "GET",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": null,
         "body": null
@@ -236,17 +295,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67/answers",
       "name": "Submit answers",
+      "method": "POST",
+      "endpoint": "http://localhost:5000/api/prompts/67/answers",
       "params": [],
       "headers": [],
-      "method": "POST",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": "application/json",
         "body": "{ \"answers\": [{ \"questionId\": \"q1\", \"answer\": \"React with Next.js\" }, { \"questionId\": \"q2\", \"answer\": \"SaaS Application\" }] }"
@@ -257,17 +316,17 @@
     },
     {
       "v": "17",
-      "endpoint": "http://localhost:5000/api/prompts/67/rerun",
       "name": "Re-run from stage",
+      "method": "POST",
+      "endpoint": "http://localhost:5000/api/prompts/67/rerun",
       "params": [],
       "headers": [],
-      "method": "POST",
+      "preRequestScript": "",
+      "testScript": "",
       "auth": {
         "authType": "inherit",
         "authActive": true
       },
-      "preRequestScript": "",
-      "testScript": "",
       "body": {
         "contentType": "application/json",
         "body": "{ \"fromStage\": \"requirements\" }"

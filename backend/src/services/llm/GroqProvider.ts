@@ -2,7 +2,7 @@ import Groq from "groq-sdk";
 import { z } from "zod";
 import { getEncoding } from "js-tiktoken";
 import { env } from "../../config/env";
-import type { LLMService, LLMResult, GenerateJSONArgs, TokenUsage } from "./LLMService";
+import type { LLMService, LLMResult, GenerateJSONArgs, GenerateTextArgs, TokenUsage } from "./LLMService";
 import { withRetry, isRetryable } from "../../utils/withRetry";
 import { LLMError } from "./GeminiProvider";
 
@@ -71,6 +71,71 @@ export class GroqProvider implements LLMService {
     }
 
     throw new LLMError(`Groq output invalid after repair attempt (${stage}): ${lastError}`);
+  }
+
+  // NEW: plain-text generation (no JSON, no schema)
+  async generateText(args: GenerateTextArgs): Promise<LLMResult<string>> {
+    const { systemPrompt, userPrompt, stage = "llm", maxOutputTokens = 2048 } = args;
+    const started = Date.now();
+
+    const call = (model: string, attempts: number) =>
+      withRetry(
+        async (signal) => {
+          const t0 = Date.now();
+          const response = await this.client.chat.completions.create(
+            {
+              model,
+              messages: [
+                ...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []),
+                { role: "user", content: userPrompt },
+              ],
+              temperature: 0.2,
+              max_completion_tokens: Math.round(maxOutputTokens * 1.5),
+              reasoning_effort: "low",
+            } as any,
+            { signal }
+          );
+          const u = response.usage;
+          console.log(
+            `[${stage}] call ${((Date.now() - t0) / 1000).toFixed(1)}s in=${u?.prompt_tokens} out=${u?.completion_tokens} model=${model}`
+          );
+          return response;
+        },
+        attempts,
+        stage,
+        { timeoutMs: TIMEOUT_MS }
+      );
+
+    let usedModel = this.model;
+    let response;
+    try {
+      response = await call(this.model, MAX_ATTEMPTS);
+    } catch (err: any) {
+      if (isRetryable(err) && env.GROQ_FALLBACK_MODEL) {
+        usedModel = env.GROQ_FALLBACK_MODEL;
+        try {
+          response = await call(usedModel, 2);
+        } catch (err2) {
+          throw new LLMError("Groq text call failed (primary and fallback)", err2);
+        }
+      } else {
+        throw new LLMError("Groq text call failed", err);
+      }
+    }
+
+    const text = response.choices?.[0]?.message?.content;
+    if (!text) throw new LLMError(`Groq returned empty text (${stage})`);
+    const u = response.usage;
+    return {
+      data: text,
+      usage: {
+        inputTokens: u?.prompt_tokens ?? 0,
+        outputTokens: u?.completion_tokens ?? 0,
+        totalTokens: u?.total_tokens ?? 0,
+      },
+      model: usedModel,
+      latencyMs: Date.now() - started,
+    };
   }
 
   private repairPrompt(original: string, error: string): string {

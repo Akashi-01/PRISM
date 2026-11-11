@@ -22,7 +22,15 @@ export interface GenerateJSONArgs<T> {
   maxOutputTokens?: number;
 }
 
+export interface GenerateTextArgs {
+  systemPrompt?: string;
+  userPrompt: string;
+  stage?: string;
+  maxOutputTokens?: number;
+}
+
 export interface LLMService {
   generateJSON<T>(args: GenerateJSONArgs<T>): Promise<LLMResult<T>>;
+  generateText(args: GenerateTextArgs): Promise<LLMResult<string>>;
   countTokens(text: string): Promise<number>;
 }

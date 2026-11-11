@@ -9,6 +9,7 @@ import { AnswersBodySchema, type MissingInfoStored } from "../schemas/stages.sch
 import { runPipeline, rerunPipeline } from "../services/promptPipeline";
 import type { Clarification } from "../pipeline/types";
 import { prisma } from "../lib/prisma";
+import { evaluateSession } from "../evaluation/evaluateSession";
 
 function parseId(raw: string | string[] | undefined): number | null {
   const value = Array.isArray(raw) ? raw[0] : raw;
@@ -215,6 +216,46 @@ export async function rerunController(req: Request, res: Response, next: NextFun
       return res.status(404).json({ success: false, error: "Not found" });
     }
     return res.json({ success: true, data });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// POST /:id/evaluate
+export async function evaluateController(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = parseId(req.params.id);
+    if (!id) return res.status(400).json({ success: false, error: "Invalid id" });
+
+    const result = await evaluateSession(id);
+    if ("error" in result) {
+      return result.error === "not_found"
+        ? res.status(404).json({ success: false, error: "Not found" })
+        : res.status(409).json({ success: false, error: "Run has no optimized prompt yet" });
+    }
+    return res.status(201).json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// GET /:id/evaluation
+export async function getEvaluationController(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = parseId(req.params.id);
+    if (!id) return res.status(400).json({ success: false, error: "Invalid id" });
+
+    const summary = await prisma.evaluationSummary.findFirst({
+      where: { sessionId: id, isCurrent: true },
+      orderBy: { id: "desc" },
+    });
+    if (!summary) return res.status(404).json({ success: false, error: "No evaluation yet" });
+
+    const responses = await prisma.responseEvaluation.findMany({
+      where: { sessionId: id, isCurrent: true },
+      orderBy: { id: "asc" },
+    });
+    res.json({ success: true, data: { summary, responses } });
   } catch (err) {
     next(err);
   }
