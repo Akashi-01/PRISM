@@ -30,6 +30,8 @@ model PromptSession {
   stages          StageResult[]
   evaluations         ResponseEvaluation[]
   evaluationSummaries EvaluationSummary[]
+  experimentItems ExperimentItem[]
+  humanRatings    HumanRating[]
 }
 
 model StageResult {
@@ -97,4 +99,48 @@ model EvaluationSummary {
   session PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId, isCurrent])
+}
+
+model Experiment {
+  id             Int       @id @default(autoincrement())
+  name           String    @unique
+  provider       String    // pipeline provider
+  model          String
+  judgeProvider  String
+  testSetVersion String
+  createdAt      DateTime  @default(now())
+  finishedAt     DateTime?
+  items          ExperimentItem[]
+}
+
+model ExperimentItem {
+  id           Int      @id @default(autoincrement())
+  experimentId Int
+  testPromptId String
+  intent       String   // intended label from the test set
+  tag          String   // verbose | redundant | vague | structured | concise
+  sessionId    Int?
+  status       String   // success | failed
+  error        String?  @db.Text
+  durationMs   Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  experiment Experiment     @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  session    PromptSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  @@unique([experimentId, testPromptId])
+  @@index([sessionId])
+}
+
+model HumanRating {
+  id             Int      @id @default(autoincrement())
+  sessionId      Int
+  rater          String   @default("me")
+  scoreOriginal  Float
+  scoreOptimized Float
+  createdAt      DateTime @default(now())
+
+  session PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, rater])
 }

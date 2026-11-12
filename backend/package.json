@@ -13,7 +13,11 @@
     "test:pipeline": "tsx src/scripts/testPipeline.ts",
     "test:demo": "tsx src/scripts/testDemo.ts",
     "test": "vitest run",
-    "test:evaluate": "tsx src/scripts/testEvaluate.ts"
+    "test:evaluate": "tsx src/scripts/testEvaluate.ts",
+    "experiment": "tsx src/scripts/runExperiment.ts",
+    "experiment:summary": "tsx src/scripts/summarizeExperiment.ts",
+    "experiment:human:export": "tsx src/scripts/humanExport.ts",
+    "experiment:human:agreement": "tsx src/scripts/humanAgreement.ts"
   },
   "keywords": [],
   "author": "",

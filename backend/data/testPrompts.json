@@ -1,0 +1,245 @@
+{
+  "version": "v1",
+  "prompts": [
+    {
+      "id": "p01",
+      "intent": "coding",
+      "tag": "verbose",
+      "text": "Hey, so I was wondering if you could maybe help me out with something. I need a Python function, a function in Python, that takes a list of integers and returns the second largest number in it. It should handle duplicates properly, like if the list is [5, 5, 4] the answer should be 4, and if there is no second largest it should return None. Please also add a few simple test cases and keep it simple, thanks so much!"
+    },
+    {
+      "id": "p02",
+      "intent": "coding",
+      "tag": "concise",
+      "text": "Write a SQL query to find the top 5 customers by total order value from tables customers(id, name) and orders(id, customer_id, total)."
+    },
+    {
+      "id": "p03",
+      "intent": "coding",
+      "tag": "vague",
+      "text": "Make my website faster."
+    },
+    {
+      "id": "p04",
+      "intent": "coding",
+      "tag": "redundant",
+      "text": "Please write JavaScript code, code in JavaScript, that debounces a function. It must be a debounce function. The debounce function should wait a given number of milliseconds before running. Explain it briefly, very briefly, in two sentences."
+    },
+    {
+      "id": "p05",
+      "intent": "coding",
+      "tag": "structured",
+      "text": "Role: senior TypeScript developer. Task: write an Express middleware that rate-limits requests per IP to 100 per 15 minutes using an in-memory Map. Constraints: no external libraries, handle cleanup of old entries. Output: one code block followed by a 3-line explanation."
+    },
+    {
+      "id": "p06",
+      "intent": "coding",
+      "tag": "verbose",
+      "text": "I have a React component that fetches data from an API when it loads and I think it is re-rendering too many times, like way too many times, and I am not sure why. Can you explain what usually causes this problem in React and show me how to fix the most common causes with code examples? I am still learning so please explain in simple words."
+    },
+    {
+      "id": "p07",
+      "intent": "coding",
+      "tag": "concise",
+      "text": "Convert this Python loop to a list comprehension:\nresult = []\nfor x in range(10):\n    if x % 2 == 0:\n        result.append(x * x)"
+    },
+    {
+      "id": "p08",
+      "intent": "writing",
+      "tag": "verbose",
+      "text": "Hi! I need an email to my manager. Basically I want to ask for a day off next Friday because I have a family function to attend, and I want it to sound polite and professional but not too formal, and not too long either, maybe like 4 or 5 sentences. Please write it for me, thank you so much in advance!"
+    },
+    {
+      "id": "p09",
+      "intent": "writing",
+      "tag": "vague",
+      "text": "Write something about my startup."
+    },
+    {
+      "id": "p10",
+      "intent": "writing",
+      "tag": "redundant",
+      "text": "Write a short blog post about the benefits of morning walks. The blog post should be short. It should be about walks in the morning and their benefits. Make it around 150 words, so not too long, and use a friendly tone, a friendly and casual tone."
+    },
+    {
+      "id": "p11",
+      "intent": "writing",
+      "tag": "structured",
+      "text": "Write a product description for a stainless steel water bottle. Audience: outdoor enthusiasts. Tone: energetic. Length: 80-100 words. Include: insulation duration (24h cold), capacity (750 ml), and a call to action. Output: one paragraph."
+    },
+    {
+      "id": "p12",
+      "intent": "writing",
+      "tag": "concise",
+      "text": "Write a haiku about monsoon rain."
+    },
+    {
+      "id": "p13",
+      "intent": "writing",
+      "tag": "verbose",
+      "text": "Could you please help me write a cover letter? I am a fresh graduate in computer science and I am applying for a junior software developer position at a mid-size company. I do not have much work experience but I did a final year project and one internship. I want the letter to sound confident but humble, and it should not be more than one page. I really really want to make a good impression."
+    },
+    {
+      "id": "p14",
+      "intent": "writing",
+      "tag": "redundant",
+      "text": "Rewrite the following sentence to be more professional, make it sound more professional and formal: 'hey guys, the meeting got pushed to tomorrow cuz the boss is busy, sorry for the mess'."
+    },
+    {
+      "id": "p15",
+      "intent": "analysis",
+      "tag": "verbose",
+      "text": "I am trying to decide between learning React and learning Vue for my next project and honestly I am confused. Could you compare them for me, like the pros and cons of each, in terms of learning curve, job market, and ecosystem, and then tell me which one you would recommend for a beginner who already knows JavaScript? Please be honest and give a clear final recommendation."
+    },
+    {
+      "id": "p16",
+      "intent": "analysis",
+      "tag": "concise",
+      "text": "Compare REST and GraphQL in a table with rows for data fetching, caching, learning curve and tooling."
+    },
+    {
+      "id": "p17",
+      "intent": "analysis",
+      "tag": "vague",
+      "text": "Analyze the market for my product."
+    },
+    {
+      "id": "p18",
+      "intent": "analysis",
+      "tag": "redundant",
+      "text": "Summarize the key causes of the 2008 financial crisis. List the main causes of the financial crisis of 2008. Keep it to 5 bullet points, five bullets only, and no long paragraphs."
+    },
+    {
+      "id": "p19",
+      "intent": "analysis",
+      "tag": "structured",
+      "text": "Role: business analyst. Task: perform a SWOT analysis of a small neighborhood bakery that plans to start online delivery. Constraints: 3 points per quadrant, each under 15 words. Output: four labeled sections."
+    },
+    {
+      "id": "p20",
+      "intent": "analysis",
+      "tag": "verbose",
+      "text": "So I have been thinking a lot about whether it is better to rent or buy a house in a big Indian city like Bengaluru. I am 28, I earn a decent salary, and I do not have any big savings yet. Can you go through the main factors I should think about, such as cost, flexibility, and long-term returns, and give me a balanced view? Please do not be too technical."
+    },
+    {
+      "id": "p21",
+      "intent": "analysis",
+      "tag": "concise",
+      "text": "What are the trade-offs of using microservices instead of a monolith for a 3-person startup? Answer in 5 bullets."
+    },
+    {
+      "id": "p22",
+      "intent": "explanation",
+      "tag": "verbose",
+      "text": "Hello! I am a bit confused about how the internet actually works. Like when I type a website name into my browser and press enter, what exactly happens behind the scenes? Could you please explain it in a way a 12 year old could understand? Step by step would be great, and please use an analogy if possible. Thanks a lot!"
+    },
+    {
+      "id": "p23",
+      "intent": "explanation",
+      "tag": "concise",
+      "text": "Explain the difference between a process and a thread in two short paragraphs."
+    },
+    {
+      "id": "p24",
+      "intent": "explanation",
+      "tag": "vague",
+      "text": "Explain AI."
+    },
+    {
+      "id": "p25",
+      "intent": "explanation",
+      "tag": "redundant",
+      "text": "Explain what a hash table is. I want to understand hash tables. Please explain hash tables simply and clearly, in a simple and clear way, with one example."
+    },
+    {
+      "id": "p26",
+      "intent": "explanation",
+      "tag": "structured",
+      "text": "Role: physics teacher. Task: explain why the sky is blue. Audience: high-school students. Constraints: mention Rayleigh scattering, under 120 words. Output: one paragraph then a one-line summary."
+    },
+    {
+      "id": "p27",
+      "intent": "explanation",
+      "tag": "verbose",
+      "text": "I keep hearing about blockchain and I really do not get it. Everyone talks about it like it is amazing but nobody explains it properly. Can you explain what a blockchain is, how it works, and why people care about it? I have no technical background so please avoid jargon, and if you have to use a technical word please explain it."
+    },
+    {
+      "id": "p28",
+      "intent": "explanation",
+      "tag": "concise",
+      "text": "What does the CAP theorem say? Give one real-world example."
+    },
+    {
+      "id": "p29",
+      "intent": "data",
+      "tag": "verbose",
+      "text": "I have a CSV file with columns name, department, salary and joining_date and I want to analyze it using Python pandas. Can you please show me how to load the file, find the average salary for each department, and then show the top 3 departments with the highest average salary? I am new to pandas so please add comments in the code."
+    },
+    {
+      "id": "p30",
+      "intent": "data",
+      "tag": "concise",
+      "text": "Extract all email addresses from this text as a JSON array: 'Reach out to anna@example.com, or write to support@example.org and bob.smith@mail.example.net.'"
+    },
+    {
+      "id": "p31",
+      "intent": "data",
+      "tag": "vague",
+      "text": "Clean my data."
+    },
+    {
+      "id": "p32",
+      "intent": "data",
+      "tag": "redundant",
+      "text": "Convert the following into a markdown table. Make it a markdown table with columns Name, Age, City: Asha 24 Delhi; Ravi 31 Pune; Meera 28 Chennai. The output must be a table in markdown format."
+    },
+    {
+      "id": "p33",
+      "intent": "data",
+      "tag": "structured",
+      "text": "Task: extract entities from the sentence below. Output format: JSON with keys person, organization, location (arrays of strings). Constraints: no extra text. Sentence: 'Sundar Pichai announced at Google headquarters in Mountain View that the company will open a new office in Hyderabad.'"
+    },
+    {
+      "id": "p34",
+      "intent": "data",
+      "tag": "verbose",
+      "text": "Hi, I have a list of customer reviews and I want to figure out whether each one is positive, negative or neutral. I do not have time to read them one by one. Can you classify these three reviews for me and give a one-line reason for each? 1) 'Delivery was late but the product is great.' 2) 'Worst purchase ever, broke in two days.' 3) 'It works as described.'"
+    },
+    {
+      "id": "p35",
+      "intent": "other",
+      "tag": "verbose",
+      "text": "Hey, I am planning a trip to Jaipur for 3 days with my parents next month and I am not sure how to plan it. They are elderly so we cannot walk too much. Could you make a simple day by day itinerary for us with the main places to visit and some food suggestions? Please keep the budget moderate, thank you!"
+    },
+    {
+      "id": "p36",
+      "intent": "other",
+      "tag": "concise",
+      "text": "Suggest 5 names for a coffee shop that also sells books."
+    },
+    {
+      "id": "p37",
+      "intent": "other",
+      "tag": "vague",
+      "text": "Help me get better at stuff."
+    },
+    {
+      "id": "p38",
+      "intent": "other",
+      "tag": "redundant",
+      "text": "Give me a 3-day workout plan for a beginner. The plan should be for beginners, 3 days only, no equipment needed, and keep each day's workout short, under 30 minutes."
+    },
+    {
+      "id": "p39",
+      "intent": "other",
+      "tag": "structured",
+      "text": "Role: career coach. Task: prepare 5 interview questions for a junior data analyst role with a one-line ideal-answer hint for each. Constraints: mix of technical and behavioral. Output: numbered list."
+    },
+    {
+      "id": "p40",
+      "intent": "other",
+      "tag": "verbose",
+      "text": "I am feeling really overwhelmed with my studies lately, there is so much to do and I never seem to finish anything on time. Could you give me some practical tips to manage my time better? I am a college student with classes from morning to afternoon and I can study only in the evenings. Please make the tips realistic."
+    }
+  ]
+}
