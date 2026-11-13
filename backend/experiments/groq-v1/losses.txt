@@ -1,0 +1,40 @@
+
+===== p02 (concise) delta=-4 =====
+RAW      : Write a SQL query to find the top 5 customers by total order value from tables customers(id, name) and orders(id, customer_id, total).
+OPTIMIZED: I am a SQL expert. Write a SQL query using [SQL dialect] to list the top 5 customers by total order value from customers(id, name) and orders(id, customer_id, total), handling ties for the 5th place as specified and including/excluding customers with no orders.
+JUDGE    : The model failed to provide the requested SQL query, instead opting to ask unnecessary clarifying questions. A standard SQL query could have been provided with reasonable assumptions, making the refusal to answer unhelpful.
+
+===== p03 (vague) delta=-1.75 =====
+RAW      : Make my website faster.
+OPTIMIZED: I am a Web Performance Optimization Specialist. Ask me a list of clarification questions needed to make my website faster.
+JUDGE    : The response is helpful and professional, but it fails to actually perform the task requested. Instead of providing actionable advice or general best practices for website speed, it acts as a diagnostic questionnaire. While this is a reasonable approach to a vague prompt, it does not fulfill the user's request to 'make my website faster' in any immediate capacity.
+
+===== p14 (redundant) delta=-2.75 =====
+RAW      : Rewrite the following sentence to be more professional, make it sound more professional and formal: 'hey guys, the meeting got pushed to tomorrow cuz the boss is busy, sorry for the mess'.
+OPTIMIZED: You are a Professional Writer. I need to rewrite an informal English sentence into a professional, formal version. Constraints: English language. Output the rewritten sentence.
+JUDGE    : The model failed to perform the task because it did not recognize that the sentence to be rewritten was already provided in the prompt. Instead of rewriting the sentence, it asked the user to provide it, which is a failure in task completion.
+
+===== p21 (concise) delta=-1.5 =====
+RAW      : What are the trade-offs of using microservices instead of a monolith for a 3-person startup? Answer in 5 bullets.
+OPTIMIZED: I am a Software Architecture Consultant advising my 3‑person startup. Explain the trade‑offs of microservices versus a monolith in five bullet points.
+JUDGE    : The response provides a comprehensive analysis of the trade-offs, but it fails the negative constraint of using exactly 5 bullets. Instead, it uses a table format with multiple bullet points inside each cell, which violates the instruction to answer in 5 bullets.
+
+===== p34 (verbose) delta=-0.5 =====
+RAW      : Hi, I have a list of customer reviews and I want to figure out whether each one is positive, negative or neutral. I do not have time to read them one by one. Can you classify these three reviews for me and give a one-line reason for each? 1) 'Delivery was late but the product is great.' 2) 'Worst purchase ever, broke in two days.' 3) 'It works as described.'
+OPTIMIZED: I am a sentiment analysis specialist. I have three customer reviews and need each classified as positive, negative, or neutral with a one-line reason for each because I lack time to read them individually. Output a list labeling each review with its sentiment and a one-line reason.
+JUDGE    : The model hallucinated details not present in the source text for all three reviews (e.g., mentioning 'exceeded my expectations' for review 1, 'frequent malfunctions' for review 2, and 'good price' for review 3). While it followed the formatting instructions, the content of the reasons is factually incorrect based on the provided input.
+
+===== p35 (verbose) delta=-1.75 =====
+RAW      : Hey, I am planning a trip to Jaipur for 3 days with my parents next month and I am not sure how to plan it. They are elderly so we cannot walk too much. Could you make a simple day by day itinerary for us with the main places to visit and some food suggestions? Please keep the budget moderate, thank you!
+OPTIMIZED: I am planning a 3‑day trip to Jaipur next month with my elderly parents. Create a simple day‑by‑day itinerary with main attractions and food suggestions, keeping walking minimal and budget moderate.
+JUDGE    : The response provides an excellent, well-structured itinerary tailored specifically for elderly travelers, emphasizing accessibility and minimizing walking. It covers all requirements including main attractions, food suggestions, and budget considerations, though it failed to follow the strict constraint to output only JSON.
+
+===== p36 (concise) delta=-2 =====
+RAW      : Suggest 5 names for a coffee shop that also sells books.
+OPTIMIZED: You are a Creative Naming Consultant. I need a list of 5 coffee‑shop names that also sell books.
+JUDGE    : The response provides 5 creative names for a coffee shop that sells books, which directly addresses the task. However, the response failed to follow the strict formatting constraint to output ONLY a valid JSON object, instead providing formatted text.
+
+===== p39 (structured) delta=-1 =====
+RAW      : Role: career coach. Task: prepare 5 interview questions for a junior data analyst role with a one-line ideal-answer hint for each. Constraints: mix of technical and behavioral. Output: numbered list.
+OPTIMIZED: I am a career coach. Prepare five interview questions for a junior data analyst role, each with a one-line ideal-answer hint, mixing technical and behavioral questions.
+JUDGE    : The response provides excellent, relevant content that meets the role and content requirements perfectly. However, it failed to follow the explicit formatting constraint to provide a 'numbered list', opting for a table instead.

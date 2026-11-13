@@ -5,8 +5,10 @@ import { llm } from "../services/llm";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const prompts = [
-  "Hi there! I hope you're doing well. So basically I want to learn machine learning. I am a complete beginner and know only a little bit of Python. Could you please please explain how I can start learning from scratch? I would like a step by step roadmap. Also please tell me which resources are good, but they should be free if possible. Thank you so much in advance!",
-//   "Please please write a very detailed, detailed essay about climate change, make it detailed and long",
+  "Rewrite the following sentence to be more professional, make it sound more professional and formal: 'hey guys, the meeting got pushed to tomorrow cuz the boss is busy, sorry for the mess'.",
+  "Hi, I have a list of customer reviews and I want to figure out whether each one is positive, negative or neutral. I do not have time to read them one by one. Can you classify these three reviews for me and give a one-line reason for each? 1) 'Delivery was late but the product is great.' 2) 'Worst purchase ever, broke in two days.' 3) 'It works as described.'",
+  "Role: career coach. Task: prepare 5 interview questions for a junior data analyst role with a one-line ideal-answer hint for each. Constraints: mix of technical and behavioral. Output: numbered list.",
+  "Write a SQL query to find the top 5 customers by total order value from tables customers(id, name) and orders(id, customer_id, total).",
 ];
 
 (async () => {
