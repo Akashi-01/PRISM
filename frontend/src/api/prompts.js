@@ -24,6 +24,15 @@ export const submitAnswers = (id, answers) =>
 export const rerunFromStage = (id, fromStage) =>
   api.post(`/prompts/${id}/rerun`, { fromStage }).then((res) => res.data.data)
 
+export const getEvaluationOverview = () =>
+  api.get('/evaluation/overview').then((res) => res.data.data)
+
+export const evaluatePrompt = (id) =>
+  api.post(`/prompts/${id}/evaluate`).then((res) => res.data.data)
+
+export const getEvaluation = (id) =>
+  api.get(`/prompts/${id}/evaluation`).then((res) => res.data.data)
+
 export function getErrorMessage(err, fallback = 'Something went wrong') {
   if (err.code === 'ECONNABORTED') return 'The request took too long. Please try again.' 
   if (!err.response) return 'Cannot reach the server. Is the backend running?'

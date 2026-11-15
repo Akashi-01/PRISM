@@ -7,6 +7,8 @@ import PipelineStepper from "../components/PipelineStepper";
 import MissingInfoPanel from "../components/MissingInfoPanel";
 import RefinementCompare from "../components/RefinementCompare";
 import ErrorBanner from "../components/ErrorBanner";
+import QualityCheck from '../components/QualityCheck'
+
 import {
   getPrompt,
   getErrorMessage,
@@ -139,6 +141,10 @@ export default function ResultsPage() {
           percentSaved: run.percentSaved,
         }}
       />
+      
+      {run.optimizedPrompt && (
+        <QualityCheck sessionId={run.id} currentRun={run.currentRun} />
+      )}
 
       <AnalysisPanel analysis={run.analysis} />
     </div>

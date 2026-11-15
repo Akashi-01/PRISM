@@ -5,6 +5,7 @@ import { prisma } from "./lib/prisma";
 import { env } from "./config/env";
 import promptRoutes from "./routes/prompt.routes";
 import { errorHandler } from "./middleware/errorHandler";
+import evaluationRoutes from "./routes/evaluation.routes";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json({ limit: "1mb" }));
 app.use("/api/prompts", promptRoutes);
+app.use("/api/evaluation", evaluationRoutes);
 app.use(errorHandler);
 
 // app.get("/api/health", (_req, res) => {
