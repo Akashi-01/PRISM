@@ -23,11 +23,18 @@ function rng(seed: number) { // mulberry32, so the sample is reproducible
     include: { session: { include: { evaluations: { where: { isCurrent: true } } } } },
   });
 
+  // only prompts where the optimizer actually changed something
+  // (for groq-v2 the guard returns the original prompt unchanged for some prompts)
+  const changed = items.filter(
+    (it) => it.session && it.session.optimizedPrompt !== it.session.rawPrompt
+  );
+  console.log(`${changed.length} of ${items.length} prompts were changed by the optimizer.`);
+
   // stratify: shuffle inside each intent, then take round-robin across intents
-  const byIntent = new Map<string, typeof items>();
-  for (const it of items) byIntent.set(it.intent, [...(byIntent.get(it.intent) ?? []), it]);
+  const byIntent = new Map<string, typeof changed>();
+  for (const it of changed) byIntent.set(it.intent, [...(byIntent.get(it.intent) ?? []), it]);
   for (const list of byIntent.values()) list.sort(() => rand() - 0.5);
-  const picked: typeof items = [];
+  const picked: typeof changed = [];
   while (picked.length < N && [...byIntent.values()].some((l) => l.length)) {
     for (const l of byIntent.values()) { const x = l.shift(); if (x && picked.length < N) picked.push(x); }
   }
