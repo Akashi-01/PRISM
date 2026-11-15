@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import PromptInput from './pages/PromptInput'
 import Results from './pages/Results'
 import History from './pages/History'
+import Evaluation from './pages/Evaluation'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/" element={<PromptInput />} />
           <Route path="/results/:id" element={<Results />} />
           <Route path="/history" element={<History />} />
+          <Route path="/evaluation" element={<Evaluation />} />
         </Routes>
       </main>
     </div>

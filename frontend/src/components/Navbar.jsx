@@ -29,6 +29,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-1">
                     <NavLink to="/" end className={linkClass}>New Prompt</NavLink>
                     <NavLink to="/history" className={linkClass}>History</NavLink>
+                    <NavLink to="/evaluation" className={linkClass}>Evaluation</NavLink>
                 </div>
             </div>
             {/* prism rainbow line */}
