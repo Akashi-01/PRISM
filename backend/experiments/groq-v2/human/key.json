@@ -1,0 +1,50 @@
+{
+  "120": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "123": {
+    "A": "original",
+    "B": "optimized"
+  },
+  "127": {
+    "A": "original",
+    "B": "optimized"
+  },
+  "129": {
+    "A": "original",
+    "B": "optimized"
+  },
+  "134": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "139": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "141": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "147": {
+    "A": "original",
+    "B": "optimized"
+  },
+  "152": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "153": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "154": {
+    "A": "optimized",
+    "B": "original"
+  },
+  "159": {
+    "A": "optimized",
+    "B": "original"
+  }
+}

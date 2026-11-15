@@ -1,0 +1,1042 @@
+[
+  {
+    "testPromptId": "p01",
+    "sessionId": 76,
+    "evaluations": [
+      {
+        "id": 23,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a correct, efficient, and well-documented Python function that meets all requirements, including handling duplicates and edge cases like single-element lists. It also includes a comprehensive set of test cases as requested."
+      },
+      {
+        "id": 24,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a correct, efficient Python function that handles duplicates and edge cases as requested. It includes clear test cases and a simple explanation of the logic."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p02",
+    "sessionId": 77,
+    "evaluations": [
+      {
+        "id": 25,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a correct and efficient SQL query that fulfills the task requirements perfectly. It includes the necessary JOIN, aggregation, sorting, and limiting clauses, and provides a clear explanation of the code."
+      },
+      {
+        "id": 26,
+        "variant": "optimized",
+        "relevance": 1,
+        "completeness": 1,
+        "instructionFollowing": 1,
+        "formatCorrectness": 1,
+        "overallScore": 1,
+        "judgeRationale": "The model failed to provide the requested SQL query, instead opting to ask unnecessary clarifying questions. A standard SQL query could have been provided with reasonable assumptions, making the refusal to answer unhelpful."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p03",
+    "sessionId": 78,
+    "evaluations": [
+      {
+        "id": 27,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The task is extremely broad and impossible to execute without context. The assistant correctly identifies this and asks for the necessary information to provide a helpful, tailored response, which is the most effective way to handle such a request."
+      },
+      {
+        "id": 28,
+        "variant": "optimized",
+        "relevance": 3,
+        "completeness": 2,
+        "instructionFollowing": 3,
+        "formatCorrectness": 5,
+        "overallScore": 3.25,
+        "judgeRationale": "The response is helpful and professional, but it fails to actually perform the task requested. Instead of providing actionable advice or general best practices for website speed, it acts as a diagnostic questionnaire. While this is a reasonable approach to a vague prompt, it does not fulfill the user's request to 'make my website faster' in any immediate capacity."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p04",
+    "sessionId": 79,
+    "evaluations": [
+      {
+        "id": 29,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a correct and functional debounce implementation in JavaScript. The explanation is exactly two sentences long as requested, and the code is accurate."
+      },
+      {
+        "id": 30,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a correct and functional debounce implementation in JavaScript. The explanation is exactly two sentences long as requested, and the code effectively handles the debouncing logic."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p05",
+    "sessionId": 80,
+    "evaluations": [
+      {
+        "id": 31,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully implements the requested rate-limiting middleware using an in-memory Map without external libraries. It includes a cleanup mechanism as requested and adheres to the specific output format constraints, including the 3-line explanation."
+      },
+      {
+        "id": 32,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The code correctly implements the rate-limiting logic using an in-memory Map without external libraries and includes a cleanup mechanism. The explanation is exactly three lines long as requested, and the code follows TypeScript best practices."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p06",
+    "sessionId": 81,
+    "evaluations": [
+      {
+        "id": 33,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent, providing a comprehensive and accurate guide to common React re-rendering issues. It directly addresses the user's request with clear explanations, practical code examples, and helpful summaries, all while maintaining an accessible tone for a learner."
+      },
+      {
+        "id": 34,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent. It directly addresses the user's problem by explaining the common causes of excessive re-renders in React, provides clear and simple explanations, and includes practical code examples for each scenario. The structure is logical, easy to follow, and perfectly matches the user's request for help with their specific React issue."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p07",
+    "sessionId": 82,
+    "evaluations": [
+      {
+        "id": 35,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly converts the provided Python loop into an equivalent list comprehension. It is concise and accurate, directly addressing the user's request without unnecessary filler."
+      },
+      {
+        "id": 36,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly converts the provided Python loop into a valid list comprehension. It accurately captures the logic of the original code snippet."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p08",
+    "sessionId": 83,
+    "evaluations": [
+      {
+        "id": 37,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly captures the requested tone, which is professional yet not overly formal. It adheres to the length constraint of 4-5 sentences and includes all necessary components for a leave request email."
+      },
+      {
+        "id": 38,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly captures the requested tone, being professional yet accessible. It adheres to the length constraint of 4-5 sentences and includes all necessary details for a time-off request."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p09",
+    "sessionId": 84,
+    "evaluations": [
+      {
+        "id": 39,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The task provided was extremely vague, making it impossible to write a meaningful description of the startup. The assistant correctly identified this ambiguity and provided a helpful, structured list of questions to gather the necessary information to fulfill the request effectively."
+      },
+      {
+        "id": 40,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly identifies that the user's request was too vague to fulfill effectively. By asking for specific details, the assistant demonstrates a proactive approach to providing high-quality, relevant content rather than guessing or writing generic filler."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p10",
+    "sessionId": 85,
+    "evaluations": [
+      {
+        "id": 41,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively captures the benefits of morning walks with a friendly and casual tone. It is very close to the requested word count, providing a concise and engaging blog post that meets all the task requirements."
+      },
+      {
+        "id": 42,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively captures the benefits of morning walks with a friendly and casual tone, as requested. It is well-written and falls within an appropriate length range (approximately 175 words), successfully meeting the task requirements."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p11",
+    "sessionId": 86,
+    "evaluations": [
+      {
+        "id": 43,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively targets outdoor enthusiasts with an energetic tone and includes all required specifications (750ml, 24h cold, call to action). It is written as a single paragraph and falls within the requested word count range (86 words)."
+      },
+      {
+        "id": 44,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly captures the energetic tone and targets the requested audience effectively. It includes all required specifications (750 ml, 24h cold, call to action) within a single paragraph. The word count is 94 words, which falls perfectly within the 80-100 word constraint."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p12",
+    "sessionId": 87,
+    "evaluations": [
+      {
+        "id": 45,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully writes a haiku about monsoon rain, adhering to the traditional 5-7-5 syllable structure. It is concise and directly addresses the prompt without unnecessary filler."
+      },
+      {
+        "id": 46,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully follows the traditional 5-7-5 syllable structure of a haiku and captures the theme of monsoon rain effectively. It adheres to all constraints and is formatted correctly."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p13",
+    "sessionId": 88,
+    "evaluations": [
+      {
+        "id": 47,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides an excellent, well-structured cover letter template that perfectly addresses the user's background as a fresh graduate. It effectively balances confidence and humility, includes placeholders for the required experience (project and internship), and maintains a professional tone suitable for a junior developer role."
+      },
+      {
+        "id": 48,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a well-structured, professional cover letter that perfectly matches the user's persona as a fresh CS graduate. It effectively balances confidence and humility, highlights the requested experience (final year project and internship), and adheres to the length constraint."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p14",
+    "sessionId": 89,
+    "evaluations": [
+      {
+        "id": 49,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully rewrites the casual sentence into a professional and formal tone as requested. It captures all the necessary information while adhering to the desired style."
+      },
+      {
+        "id": 50,
+        "variant": "optimized",
+        "relevance": 2,
+        "completeness": 1,
+        "instructionFollowing": 1,
+        "formatCorrectness": 5,
+        "overallScore": 2.25,
+        "judgeRationale": "The model failed to perform the task because it did not recognize that the sentence to be rewritten was already provided in the prompt. Instead of rewriting the sentence, it asked the user to provide it, which is a failure in task completion."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p15",
+    "sessionId": 90,
+    "evaluations": [
+      {
+        "id": 51,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive and well-structured comparison between React and Vue, covering all requested areas (learning curve, job market, ecosystem, pros/cons). It offers a clear, honest, and actionable recommendation for a beginner, supported by a logical weighted analysis. The formatting is excellent, using tables and clear headings to make the information digestible."
+      },
+      {
+        "id": 52,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive, well-structured comparison between React and Vue, covering all requested aspects (pros/cons, learning curve, job market, ecosystem). It offers a clear, honest recommendation for a beginner, supported by a logical decision matrix and actionable next steps. The content is highly relevant and follows all instructions perfectly."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p16",
+    "sessionId": 91,
+    "evaluations": [
+      {
+        "id": 53,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, accurate comparison table covering all four requested aspects: data fetching, caching, learning curve, and tooling. It adheres strictly to the requested format and content requirements."
+      },
+      {
+        "id": 54,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, accurate table comparing REST and GraphQL across all requested categories. While it includes extra text outside the table (intro and summary), the core task of creating the table with the specified rows was completed perfectly."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p17",
+    "sessionId": 92,
+    "evaluations": [
+      {
+        "id": 55,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The user provided an extremely vague prompt, making it impossible to perform a meaningful market analysis. The assistant correctly identified this limitation and provided a comprehensive, structured list of questions to gather the necessary context to fulfill the request effectively."
+      },
+      {
+        "id": 56,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The user provided a generic request without specifying a product, making it impossible to perform a specific analysis. The AI correctly identified this limitation and provided a comprehensive, high-quality framework and template that the user can use to conduct the analysis themselves. This is the most helpful and relevant way to handle an underspecified prompt."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p18",
+    "sessionId": 93,
+    "evaluations": [
+      {
+        "id": 57,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately summarizes the key causes of the 2008 financial crisis within the requested constraints. It provides exactly five bullet points, avoids long paragraphs, and directly addresses the prompt."
+      },
+      {
+        "id": 58,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately identifies the key causes of the 2008 financial crisis and adheres strictly to the constraint of providing exactly five bullet points. It avoids long paragraphs and directly addresses the prompt's requirements."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p19",
+    "sessionId": 94,
+    "evaluations": [
+      {
+        "id": 59,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully performs a SWOT analysis for the bakery with exactly three points per quadrant. Each point is concise and well under the 15-word limit, and the content is relevant to the business scenario provided."
+      },
+      {
+        "id": 60,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively performs the SWOT analysis with the requested number of points per quadrant. Each point is concise and well under the 15-word limit, and the content is relevant to the scenario of a small bakery starting online delivery."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p20",
+    "sessionId": 95,
+    "evaluations": [
+      {
+        "id": 61,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent. It directly addresses the user's situation (28-year-old in Bengaluru with limited savings), covers all requested factors (cost, flexibility, long-term returns), and maintains a balanced, non-technical tone. The use of tables and clear, actionable steps makes the information easy to digest."
+      },
+      {
+        "id": 62,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively addresses all aspects of the user's request, including the specific factors of cost, flexibility, and long-term returns. It maintains a balanced, non-technical tone suitable for the user's profile and provides a clear summary. The use of a table makes the comparison easy to digest."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p21",
+    "sessionId": 96,
+    "evaluations": [
+      {
+        "id": 63,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly addresses the prompt by providing five distinct, well-reasoned trade-offs relevant to a 3-person startup. It adheres strictly to the requested format and content constraints."
+      },
+      {
+        "id": 64,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 2,
+        "formatCorrectness": 2,
+        "overallScore": 3.5,
+        "judgeRationale": "The response provides a comprehensive analysis of the trade-offs, but it fails the negative constraint of using exactly 5 bullets. Instead, it uses a table format with multiple bullet points inside each cell, which violates the instruction to answer in 5 bullets."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p22",
+    "sessionId": 97,
+    "evaluations": [
+      {
+        "id": 65,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly addresses the user's request by providing a clear, step-by-step explanation suitable for a 12-year-old. It effectively uses a postal system analogy throughout the explanation and includes a helpful summary table."
+      },
+      {
+        "id": 66,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly addresses the user's request by providing a clear, step-by-step explanation of how the internet works. It effectively uses a postal mail analogy throughout the entire process, making the technical concepts very accessible for a 12-year-old audience."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p23",
+    "sessionId": 98,
+    "evaluations": [
+      {
+        "id": 67,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately explains the differences between a process and a thread. It adheres to the constraint of providing the information in exactly two paragraphs."
+      },
+      {
+        "id": 68,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately explains the technical differences between a process and a thread. It strictly adheres to the constraint of providing exactly two short paragraphs."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p24",
+    "sessionId": 99,
+    "evaluations": [
+      {
+        "id": 69,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive, well-structured, and accurate explanation of AI that covers all relevant aspects of the topic. It is highly informative and easy to read, though it is much longer and more detailed than a simple explanation might require, it still fulfills the task perfectly."
+      },
+      {
+        "id": 70,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive and well-structured explanation of AI, covering definitions, core concepts, paradigms, and examples. It effectively uses tables to organize information, making it very readable and informative."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p25",
+    "sessionId": 100,
+    "evaluations": [
+      {
+        "id": 71,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, simple explanation of hash tables using an intuitive phone book analogy. It effectively balances high-level conceptual understanding with a concrete, step-by-step code example as requested."
+      },
+      {
+        "id": 72,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, accurate, and well-structured explanation of hash tables. It successfully uses an analogy, a concrete step-by-step example, and covers the core concepts without being overly dense."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p26",
+    "sessionId": 101,
+    "evaluations": [
+      {
+        "id": 73,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively explains the phenomenon using appropriate terminology for high-school students while adhering to the constraint of mentioning Rayleigh scattering. It follows the requested structure of a single paragraph followed by a one-line summary and stays well under the 120-word limit."
+      },
+      {
+        "id": 74,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response effectively explains the phenomenon using appropriate terminology for high-school students while adhering to the Rayleigh scattering requirement. It follows all formatting and length constraints perfectly, providing a clear paragraph followed by a concise one-line summary."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p27",
+    "sessionId": 102,
+    "evaluations": [
+      {
+        "id": 75,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent. It uses clear, accessible analogies (the shared notebook and Google Docs) to explain complex concepts without relying on jargon. It directly addresses all parts of the prompt—what it is, how it works, and why it matters—while adhering to the constraint of explaining any technical terms used."
+      },
+      {
+        "id": 76,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent. It uses clear, non-technical analogies (the shared notebook) to explain complex concepts, successfully avoids unnecessary jargon, and defines the technical terms it does use (like nodes and hash). It covers all parts of the prompt—what it is, how it works, and why it matters—in a structured and easy-to-read format."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p28",
+    "sessionId": 103,
+    "evaluations": [
+      {
+        "id": 77,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately explains the CAP theorem, defining the three components and the trade-offs involved. It also provides a clear, well-explained real-world example using Amazon DynamoDB to illustrate an AP system."
+      },
+      {
+        "id": 78,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response accurately explains the CAP theorem and provides a clear, relevant real-world example (Amazon DynamoDB). It adheres to all instructions, although the format of the evaluation output itself must be strictly JSON as per the system prompt."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p29",
+    "sessionId": 104,
+    "evaluations": [
+      {
+        "id": 79,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, well-commented, and accurate Python script using pandas that fulfills all the user's requirements. It correctly handles loading the data, calculating the average salary per department, and identifying the top 3 departments, while also including helpful data cleaning steps for a beginner."
+      },
+      {
+        "id": 80,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a clear, well-commented Python script that perfectly addresses all parts of the user's request. It correctly uses pandas to load the data, calculate the average salary per department, and extract the top 3 departments, while also providing helpful context and installation instructions."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p30",
+    "sessionId": 105,
+    "evaluations": [
+      {
+        "id": 81,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly identified all three email addresses present in the source text. It provided the output as a valid JSON array as requested, although it included markdown code block formatting which was not explicitly forbidden but slightly deviates from a raw JSON string."
+      },
+      {
+        "id": 82,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly identifies all three email addresses from the provided text and formats them as a valid JSON array. It adheres strictly to the formatting requirements without including extraneous text."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p31",
+    "sessionId": 106,
+    "evaluations": [
+      {
+        "id": 83,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The task was extremely underspecified, and the model correctly identified that it could not perform the task without further information. It provided a helpful, structured list of questions to clarify the user's needs, which is the most appropriate way to handle such a vague prompt."
+      },
+      {
+        "id": 84,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The task provided was extremely vague, making it impossible to perform the action directly. The assistant correctly identified this ambiguity and provided a comprehensive, structured questionnaire to gather the necessary context to actually perform the data cleaning task."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p32",
+    "sessionId": 107,
+    "evaluations": [
+      {
+        "id": 85,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly converts the provided data into a valid markdown table with the requested columns. It accurately captures all the information provided in the prompt."
+      },
+      {
+        "id": 86,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully converts the provided data into the requested markdown table format. It includes all necessary columns and data points accurately."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p33",
+    "sessionId": 108,
+    "evaluations": [
+      {
+        "id": 87,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly identifies all entities and categorizes them into the requested JSON structure. It adheres strictly to the constraint of providing no extra text."
+      },
+      {
+        "id": 88,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly identifies all entities and maps them to the requested JSON keys. It strictly adheres to the 'no extra text' constraint and provides a valid JSON object."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p34",
+    "sessionId": 109,
+    "evaluations": [
+      {
+        "id": 89,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response correctly classifies all three reviews and provides a concise, one-line reason for each as requested. It follows the instructions perfectly and maintains the requested format."
+      },
+      {
+        "id": 90,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 3,
+        "formatCorrectness": 5,
+        "overallScore": 4.5,
+        "judgeRationale": "The model hallucinated details not present in the source text for all three reviews (e.g., mentioning 'exceeded my expectations' for review 1, 'frequent malfunctions' for review 2, and 'good price' for review 3). While it followed the formatting instructions, the content of the reasons is factually incorrect based on the provided input."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p35",
+    "sessionId": 110,
+    "evaluations": [
+      {
+        "id": 91,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides an excellent, comprehensive, and highly relevant 3-day itinerary tailored specifically for elderly travelers. It includes practical advice on mobility, budget-friendly options, and specific food recommendations, all while adhering to the requested structure and constraints."
+      },
+      {
+        "id": 92,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 2,
+        "formatCorrectness": 1,
+        "overallScore": 3.25,
+        "judgeRationale": "The response provides an excellent, well-structured itinerary tailored specifically for elderly travelers, emphasizing accessibility and minimizing walking. It covers all requirements including main attractions, food suggestions, and budget considerations, though it failed to follow the strict constraint to output only JSON."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p36",
+    "sessionId": 111,
+    "evaluations": [
+      {
+        "id": 93,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully provides five creative and relevant names for a coffee shop that also sells books. It directly addresses the prompt's requirements without unnecessary filler."
+      },
+      {
+        "id": 94,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 1,
+        "formatCorrectness": 1,
+        "overallScore": 3,
+        "judgeRationale": "The response provides 5 creative names for a coffee shop that sells books, which directly addresses the task. However, the response failed to follow the strict formatting constraint to output ONLY a valid JSON object, instead providing formatted text."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p37",
+    "sessionId": 112,
+    "evaluations": [
+      {
+        "id": 95,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive, structured, and highly actionable framework for self-improvement that directly addresses the user's broad request. It breaks down the process into logical steps, uses clear formatting (tables, checklists), and offers concrete examples that make the advice easy to implement."
+      },
+      {
+        "id": 96,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is excellent. It takes a vague, open-ended request and provides a highly structured, actionable, and comprehensive framework for self-improvement. It uses clear formatting, tables, and concrete examples to make the advice easy to digest and implement."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p38",
+    "sessionId": 113,
+    "evaluations": [
+      {
+        "id": 97,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response perfectly follows all instructions, providing a 3-day beginner workout plan that requires no equipment and is designed to be completed in under 30 minutes. The structure is clear, easy to follow, and includes helpful guidelines for a beginner."
+      },
+      {
+        "id": 98,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides a comprehensive 3-day workout plan that is perfectly suited for beginners. It adheres to all constraints, including the 'no equipment' requirement and keeping the duration under 30 minutes per session."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p39",
+    "sessionId": 114,
+    "evaluations": [
+      {
+        "id": 99,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response successfully provides 5 interview questions for a junior data analyst role, including a mix of technical and behavioral questions as requested. Each question includes a concise ideal-answer hint, and the output is formatted as a numbered list."
+      },
+      {
+        "id": 100,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 3,
+        "formatCorrectness": 3,
+        "overallScore": 4,
+        "judgeRationale": "The response provides excellent, relevant content that meets the role and content requirements perfectly. However, it failed to follow the explicit formatting constraint to provide a 'numbered list', opting for a table instead."
+      }
+    ]
+  },
+  {
+    "testPromptId": "p40",
+    "sessionId": 115,
+    "evaluations": [
+      {
+        "id": 101,
+        "variant": "original",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response provides highly practical, actionable, and realistic time-management strategies tailored specifically to the user's constraint of having only evening hours available for study. It covers all aspects of the request, including a structured plan, specific techniques like the 'Power Hour' and 'Active Recall', and a sample routine."
+      },
+      {
+        "id": 102,
+        "variant": "optimized",
+        "relevance": 5,
+        "completeness": 5,
+        "instructionFollowing": 5,
+        "formatCorrectness": 5,
+        "overallScore": 5,
+        "judgeRationale": "The response is highly relevant, providing a structured, realistic, and actionable plan specifically tailored to a student with evening-only study availability. It covers all aspects of the request, including time management techniques, environmental setup, and even emergency hacks, while maintaining a supportive and practical tone."
+      }
+    ]
+  }
+]
