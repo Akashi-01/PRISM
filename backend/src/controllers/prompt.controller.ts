@@ -39,9 +39,9 @@ export async function analyzeController(req: Request, res: Response, next: NextF
 export async function listController(_req: Request, res: Response, next: NextFunction) {
   try {
     const data = await prisma.promptSession.findMany({
-      where: { optimizedPrompt: { not: null } },
+      where: { optimizedPrompt: { not: null }, experimentItems: { none: {} } },
       orderBy: { createdAt: "desc" },
-      take: 50,
+      take: 200,
     });
     res.json({ success: true, data });
   } catch (err) {
@@ -65,7 +65,11 @@ export async function getByIdController(req: Request, res: Response, next: NextF
     }
 
     const runNumber = await prisma.promptSession.count({
-      where: { optimizedPrompt: { not: null }, id: { lte: id } },
+      where: {
+        optimizedPrompt: { not: null },
+        experimentItems: { none: {} },
+        id: { lte: id },
+      },
     });
 
     res.json({ success: true, data: Object.assign({}, data, { runNumber }) });

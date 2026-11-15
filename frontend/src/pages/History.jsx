@@ -65,11 +65,12 @@ export default function History() {
                 </div>
                 <div className="rounded-lg border border-green-200 bg-green-50 p-4">
                     <p className="text-xs uppercase tracking-wide text-gray-500">
-                        Avg savings, prompts over 100 tokens
+                        LONG-PROMPT SAVINGS (&gt;100 TOKENS)
                     </p>
                     <p className="mt-1 text-2xl font-bold text-green-600">
                         {avgLong !== null ? `${avgLong}%` : '—'}
                     </p>
+                    <p className="mt-1 text-xs text-gray-500">n = {longRuns.length} runs</p>
                 </div>
             </div>
 
