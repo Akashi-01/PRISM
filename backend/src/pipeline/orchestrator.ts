@@ -90,8 +90,17 @@ export async function runPipeline(
         };
       }
 
-      if (stage.name === "optimize") optimization = result.data;
-      else (ctx.results as Record<string, unknown>)[stage.name] = result.data;
+      if (stage.name === "optimize") {
+      const o = result.data as { optimizedPrompt: string };
+      const hasAnswers = (opts.clarifications ?? []).some((c) => c.answer.trim());
+      // Guard: without user answers, never return a prompt longer than the original
+      if (!hasAnswers && o.optimizedPrompt.length >= rawPrompt.length) {
+        o.optimizedPrompt = rawPrompt;
+      }
+      optimization = o;
+      } else {
+        (ctx.results as Record<string, unknown>)[stage.name] = result.data;
+      }
 
       await prisma.stageResult.create({
         data: {

@@ -20,6 +20,7 @@ Rules:
 - Judge only how well the response does what the task asks. Do not reward length, politeness or extra content the task did not ask for.
 - Do not assume anything about how the response was produced.
 - First write a short rationale (2-4 sentences) naming specific strengths and gaps, then the scores.
+- The JSON output requirement applies only to YOUR reply. The response you are evaluating has no required format except what the task itself asks for.
 
 ${RUBRIC_TEXT}
 

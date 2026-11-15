@@ -1,0 +1,11 @@
+{
+  "prompts": 12,
+  "responses": 24,
+  "pearson": -0.259,
+  "spearman": -0.468,
+  "meanAbsDiff": 0.29,
+  "within1PointPct": 100,
+  "preferenceAgreementPct": 75,
+  "meanHuman": 4.72,
+  "meanJudge": 4.98
+}

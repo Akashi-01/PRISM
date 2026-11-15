@@ -1,0 +1,136 @@
+{
+  "overall": [
+    {
+      "version": "groq-v1",
+      "n": 40,
+      "medianSavedPct": 17.9,
+      "aggregateSavedPct": 12.7,
+      "qualityOriginal": 4.99,
+      "qualityOptimized": 4.66,
+      "retentionPct": 93.5,
+      "losses": 6
+    },
+    {
+      "version": "groq-v2",
+      "n": 40,
+      "medianSavedPct": 14.6,
+      "aggregateSavedPct": 27,
+      "qualityOriginal": 4.99,
+      "qualityOptimized": 4.99,
+      "retentionPct": 100,
+      "losses": 0
+    }
+  ],
+  "byTag": [
+    {
+      "tag": "verbose",
+      "version": "groq-v1",
+      "n": 12,
+      "medianSavedPct": 27.6,
+      "aggregateSavedPct": 30.2,
+      "qualityOriginal": 5,
+      "qualityOptimized": 4.79,
+      "retentionPct": 95.8,
+      "losses": 1
+    },
+    {
+      "tag": "verbose",
+      "version": "groq-v2",
+      "n": 12,
+      "medianSavedPct": 34.7,
+      "aggregateSavedPct": 36.1,
+      "qualityOriginal": 5,
+      "qualityOptimized": 5,
+      "retentionPct": 100,
+      "losses": 0
+    },
+    {
+      "tag": "concise",
+      "version": "groq-v1",
+      "n": 9,
+      "medianSavedPct": -50,
+      "aggregateSavedPct": -53.5,
+      "qualityOriginal": 5,
+      "qualityOptimized": 4.42,
+      "retentionPct": 88.3,
+      "losses": 2
+    },
+    {
+      "tag": "concise",
+      "version": "groq-v2",
+      "n": 9,
+      "medianSavedPct": 0,
+      "aggregateSavedPct": 1,
+      "qualityOriginal": 5,
+      "qualityOptimized": 5,
+      "retentionPct": 100,
+      "losses": 0
+    },
+    {
+      "tag": "vague",
+      "version": "groq-v1",
+      "n": 6,
+      "medianSavedPct": -262.5,
+      "aggregateSavedPct": -231.2,
+      "qualityOriginal": 4.96,
+      "qualityOptimized": 4.71,
+      "retentionPct": 95,
+      "losses": 1
+    },
+    {
+      "tag": "vague",
+      "version": "groq-v2",
+      "n": 6,
+      "medianSavedPct": 0,
+      "aggregateSavedPct": 0,
+      "qualityOriginal": 5,
+      "qualityOptimized": 5,
+      "retentionPct": 100,
+      "losses": 0
+    },
+    {
+      "tag": "redundant",
+      "version": "groq-v1",
+      "n": 7,
+      "medianSavedPct": 36.4,
+      "aggregateSavedPct": 34.6,
+      "qualityOriginal": 4.96,
+      "qualityOptimized": 4.57,
+      "retentionPct": 92.1,
+      "losses": 1
+    },
+    {
+      "tag": "redundant",
+      "version": "groq-v2",
+      "n": 7,
+      "medianSavedPct": 45.5,
+      "aggregateSavedPct": 37.6,
+      "qualityOriginal": 4.96,
+      "qualityOptimized": 4.96,
+      "retentionPct": 100,
+      "losses": 0
+    },
+    {
+      "tag": "structured",
+      "version": "groq-v1",
+      "n": 6,
+      "medianSavedPct": 4.8,
+      "aggregateSavedPct": 6.4,
+      "qualityOriginal": 5,
+      "qualityOptimized": 4.83,
+      "retentionPct": 96.7,
+      "losses": 1
+    },
+    {
+      "tag": "structured",
+      "version": "groq-v2",
+      "n": 6,
+      "medianSavedPct": 5.6,
+      "aggregateSavedPct": 7.8,
+      "qualityOriginal": 5,
+      "qualityOptimized": 5,
+      "retentionPct": 100,
+      "losses": 0
+    }
+  ]
+}
