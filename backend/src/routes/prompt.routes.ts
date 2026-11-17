@@ -10,8 +10,10 @@ import {
   evaluateController,
   getEvaluationController,
 } from "../controllers/prompt.controller";
+import { requireAuth } from "../middleware/requireAuth";
 
 const router = Router();
+router.use(requireAuth);
 
 router.post("/analyze", analyzeController);
 router.get("/", listController);

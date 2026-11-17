@@ -18,6 +18,20 @@ function parseId(raw: string | string[] | undefined): number | null {
   return Number.isInteger(id) && id > 0 ? id : null;
 }
 
+// requireAuth always runs before these controllers
+function userIdOf(req: Request): number {
+  return req.user!.id;
+}
+
+// true only if the session exists AND belongs to this user
+async function ownsSession(id: number, userId: number): Promise<boolean> {
+  const row = await prisma.promptSession.findFirst({
+    where: { id, userId },
+    select: { id: true },
+  });
+  return row !== null;
+}
+
 export async function analyzeController(req: Request, res: Response, next: NextFunction) {
   try {
     const parsed = analyzeRequestSchema.safeParse(req.body);
@@ -40,17 +54,23 @@ export async function analyzeController(req: Request, res: Response, next: NextF
       });
     }
 
+    const userId = userIdOf(req);
     const session = await runPipeline(prompt, provider);
-    return res.status(201).json({ success: true, data: session });
+    await prisma.promptSession.update({ where: { id: session.id }, data: { userId } });
+    return res.status(201).json({ success: true, data: { ...session, userId } });
   } catch (err) {
     next(err);
   }
 }
 
-export async function listController(_req: Request, res: Response, next: NextFunction) {
+export async function listController(req: Request, res: Response, next: NextFunction) {
   try {
     const data = await prisma.promptSession.findMany({
-      where: { optimizedPrompt: { not: null }, experimentItems: { none: {} } },
+      where: {
+        userId: userIdOf(req),
+        optimizedPrompt: { not: null },
+        experimentItems: { none: {} },
+      },
       orderBy: { createdAt: "desc" },
       take: 200,
     });
@@ -66,9 +86,10 @@ export async function getByIdController(req: Request, res: Response, next: NextF
     if (!id) {
       return res.status(400).json({ success: false, error: "Invalid id" });
     }
+    const userId = userIdOf(req);
 
-    const data = await prisma.promptSession.findUnique({
-      where: { id },
+    const data = await prisma.promptSession.findFirst({
+      where: { id, userId },
       include: { stages: { where: { isCurrent: true }, orderBy: { id: "asc" } } },
     });
     if (!data) {
@@ -77,6 +98,7 @@ export async function getByIdController(req: Request, res: Response, next: NextF
 
     const runNumber = await prisma.promptSession.count({
       where: {
+        userId,
         optimizedPrompt: { not: null },
         experimentItems: { none: {} },
         id: { lte: id },
@@ -98,8 +120,8 @@ export async function listStagesController(req: Request, res: Response, next: Ne
       return res.status(400).json({ success: false, error: "Invalid id" });
     }
 
-    const session = await prisma.promptSession.findUnique({
-      where: { id },
+    const session = await prisma.promptSession.findFirst({
+      where: { id, userId: userIdOf(req) },
       select: { id: true, currentRun: true },
     });
     if (!session) {
@@ -131,6 +153,9 @@ export async function getStageController(req: Request, res: Response, next: Next
     const stageName = stageNameSchema.safeParse(req.params.stageName);
     if (!stageName.success) {
       return res.status(400).json({ success: false, error: "Unknown stage" });
+    }
+    if (!(await ownsSession(id, userIdOf(req)))) {
+      return res.status(404).json({ success: false, error: "Not found" });
     }
 
     const stage = await prisma.stageResult.findFirst({
@@ -164,7 +189,9 @@ export async function answersController(req: Request, res: Response, next: NextF
       });
     }
 
-    const session = await prisma.promptSession.findUnique({ where: { id } });
+    const session = await prisma.promptSession.findFirst({
+      where: { id, userId: userIdOf(req) },
+    });
     if (!session) {
       return res.status(404).json({ success: false, error: "Not found" });
     }
@@ -225,6 +252,9 @@ export async function rerunController(req: Request, res: Response, next: NextFun
         details: z.flattenError(parsed.error).fieldErrors,
       });
     }
+    if (!(await ownsSession(id, userIdOf(req)))) {
+      return res.status(404).json({ success: false, error: "Not found" });
+    }
 
     const data = await rerunPipeline(id, { fromStage: parsed.data.fromStage });
     if (!data) {
@@ -241,6 +271,9 @@ export async function evaluateController(req: Request, res: Response, next: Next
   try {
     const id = parseId(req.params.id);
     if (!id) return res.status(400).json({ success: false, error: "Invalid id" });
+    if (!(await ownsSession(id, userIdOf(req)))) {
+      return res.status(404).json({ success: false, error: "Not found" });
+    }
 
     const result = await evaluateSession(id);
     if ("error" in result) {
@@ -259,6 +292,9 @@ export async function getEvaluationController(req: Request, res: Response, next:
   try {
     const id = parseId(req.params.id);
     if (!id) return res.status(400).json({ success: false, error: "Invalid id" });
+    if (!(await ownsSession(id, userIdOf(req)))) {
+      return res.status(404).json({ success: false, error: "Not found" });
+    }
 
     const summary = await prisma.evaluationSummary.findFirst({
       where: { sessionId: id, isCurrent: true },
