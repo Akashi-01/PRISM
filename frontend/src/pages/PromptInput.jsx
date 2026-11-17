@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { analyzePrompt, getErrorMessage} from '../api/prompts';
+import { analyzePrompt, getErrorMessage } from '../api/prompts';
 import Spinner from '../components/Spinner';
 import ErrorBanner from '../components/ErrorBanner';
 import LoadingStages from "../components/LoadingStages";
@@ -22,26 +22,32 @@ const SAMPLES = [
   },
 ];
 
+const PROVIDERS = [
+  { id: 'groq', label: 'Groq', hint: 'fast' },
+  { id: 'gemini', label: 'Gemini', hint: 'Google' },
+]
+
 export default function PromptInput() {
     const navigate = useNavigate()          // 1. call the hook at the top of the component
     const [prompt, setPrompt] = useState('')
+    const [provider, setProvider] = useState('groq')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const elapsed = useElapsed(loading)
 
     const handleSubmit = async () => {
-    if (loading || !prompt.trim()) return          // guard against double submits
-    setLoading(true)
-    setError('')
-    try {
-        const result = await analyzePrompt(prompt.trim())   // send trimmed text
-        navigate(`/results/${result.id}`)
-    } catch (err) {
-        setError(getErrorMessage(err))
-    } finally {
-        setLoading(false)
+        if (loading || !prompt.trim()) return          // guard against double submits
+        setLoading(true)
+        setError('')
+        try {
+            const result = await analyzePrompt(prompt.trim(), provider)   // send trimmed text + chosen model
+            navigate(`/results/${result.id}`)
+        } catch (err) {
+            setError(getErrorMessage(err))
+        } finally {
+            setLoading(false)
+        }
     }
-}
 
     return (
         <div className="space-y-4">
@@ -54,18 +60,38 @@ export default function PromptInput() {
 
             {/* example buttons */}
             <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="text-sm text-gray-500">Try an example:</span>
-            {SAMPLES.map((s) => (
-                <button
-                key={s.label}
-                type="button"
-                disabled={loading}
-                onClick={() => setPrompt(s.text)}
-                className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm text-indigo-700 hover:bg-indigo-100 disabled:opacity-50"
-                >
-                {s.label}
-                </button>
-            ))}
+                <span className="text-sm text-gray-500">Try an example:</span>
+                {SAMPLES.map((s) => (
+                    <button
+                        key={s.label}
+                        type="button"
+                        disabled={loading}
+                        onClick={() => setPrompt(s.text)}
+                        className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm text-indigo-700 hover:bg-indigo-100 disabled:opacity-50"
+                    >
+                        {s.label}
+                    </button>
+                ))}
+            </div>
+
+            {/* model selector */}
+            <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm text-gray-500">Model:</span>
+                {PROVIDERS.map((p) => (
+                    <button
+                        key={p.id}
+                        type="button"
+                        disabled={loading}
+                        onClick={() => setProvider(p.id)}
+                        className={`rounded-full border px-3 py-1 text-sm font-medium disabled:opacity-50 ${
+                            provider === p.id
+                                ? 'border-indigo-600 bg-indigo-600 text-white'
+                                : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        }`}
+                    >
+                        {p.label} <span className="opacity-70">({p.hint})</span>
+                    </button>
+                ))}
             </div>
 
             <textarea

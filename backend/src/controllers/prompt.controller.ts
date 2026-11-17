@@ -10,6 +10,7 @@ import { runPipeline, rerunPipeline } from "../services/promptPipeline";
 import type { Clarification } from "../pipeline/types";
 import { prisma } from "../lib/prisma";
 import { evaluateSession } from "../evaluation/evaluateSession";
+import { isProviderAvailable } from "../services/llm";
 
 function parseId(raw: string | string[] | undefined): number | null {
   const value = Array.isArray(raw) ? raw[0] : raw;
@@ -29,7 +30,17 @@ export async function analyzeController(req: Request, res: Response, next: NextF
       });
     }
 
-    const session = await runPipeline(parsed.data.prompt);
+    const { prompt, provider } = parsed.data;
+
+    // the chosen provider must have an API key on the server
+    if (provider && !isProviderAvailable(provider)) {
+      return res.status(400).json({
+        success: false,
+        error: `${provider} is not configured on the server`,
+      });
+    }
+
+    const session = await runPipeline(prompt, provider);
     return res.status(201).json({ success: true, data: session });
   } catch (err) {
     next(err);

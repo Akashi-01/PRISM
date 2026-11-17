@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import type { LLMService } from "../services/llm/LLMService";
 import type { IntentOutput, RequirementsOutput, MissingInfoStored,
   RedundancyOutput, TaskStructureOutput } from "../schemas/stages.schema";
 
@@ -15,6 +16,7 @@ export interface Clarification {
 export interface PipelineContext {
   rawPrompt: string;
   clarifications?: Clarification[];
+  llm?: LLMService;   // provider client for this run (default: the global one)
   results: {
     intent?: IntentOutput;
     requirements?: RequirementsOutput;

@@ -6,6 +6,7 @@ export const analyzeRequestSchema = z.object({
     .trim()
     .min(10, "Prompt must be at least 10 characters")
     .max(8000, "Prompt must be at most 8000 characters"),
+    provider: z.enum(["gemini", "groq"]).optional(),
 });
 
 export const optimizeRequestSchema = z.object({

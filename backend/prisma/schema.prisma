@@ -23,6 +23,7 @@ model PromptSession {
   tokensSaved     Int?
   percentSaved    Float?
   model           String?
+  provider        String?
   latencyMs       Int?
   createdAt       DateTime @default(now())
   clarifications  Json?

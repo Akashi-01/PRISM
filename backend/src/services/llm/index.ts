@@ -26,3 +26,11 @@ console.log(`[llm] pipeline=${env.LLM_PROVIDER} generator=${GENERATOR_PROVIDER} 
 export const llm = getProvider(env.LLM_PROVIDER);          // pipeline stages (unchanged)
 export const generatorLLM = getProvider(GENERATOR_PROVIDER);
 export const judgeLLM = getProvider(JUDGE_PROVIDER);
+
+export type ProviderName = "gemini" | "groq";
+
+export function isProviderAvailable(name: string): boolean {
+  if (name === "gemini") return !!env.GEMINI_API_KEY;
+  if (name === "groq") return !!env.GROQ_API_KEY;
+  return false;
+}

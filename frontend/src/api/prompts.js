@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const api = axios.create({ baseURL: '/api', timeout: 120000 })   // changed: added timeout
 
-export const analyzePrompt = (prompt) =>
-  api.post('/prompts/analyze', { prompt }).then((res) => res.data.data)
+export const analyzePrompt = (prompt, provider) =>
+  api.post('/prompts/analyze', { prompt, provider }).then((res) => res.data.data)
 
 export const getPrompt = (id) =>
   api.get(`/prompts/${id}`).then((res) => res.data.data)

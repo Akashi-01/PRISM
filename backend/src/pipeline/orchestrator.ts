@@ -7,6 +7,7 @@ import {
   intentStage, requirementsStage, missingInfoStage,
   redundancyStage, taskStructureStage, optimizeStage,
 } from "./stages";
+import type { LLMService } from "../services/llm/LLMService";
 
 const STAGES = [
   intentStage, requirementsStage, missingInfoStage,
@@ -18,6 +19,8 @@ export const STAGE_NAMES: StageName[] = STAGES.map((s) => s.name);
 export interface RunOptions {
   fromStage?: StageName;
   clarifications?: Clarification[];
+  llm?: LLMService;
+  provider?: string;
 }
 
 export async function runPipeline(
@@ -38,6 +41,7 @@ export async function runPipeline(
     rawPrompt,
     results: {},
     clarifications: opts.clarifications,
+    llm: opts.llm,
   };
   let optimization: any;
 
