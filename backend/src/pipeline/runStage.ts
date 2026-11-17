@@ -1,4 +1,4 @@
-import { llm } from "../services/llm";
+import { llm as defaultLLM } from "../services/llm";
 import type { LLMResult } from "../services/llm/LLMService";
 import type { PipelineContext, StageDef } from "./types";
 
@@ -7,10 +7,11 @@ export async function runStage<T>(
   ctx: PipelineContext,
   maxAttempts = 1
 ): Promise<LLMResult<T>> {
+  const client = ctx.llm ?? defaultLLM;
   let lastError: unknown;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      return await llm.generateJSON({
+      return await client.generateJSON({
         systemPrompt: stage.system,
         userPrompt: stage.buildInput(ctx),
         schema: stage.schema,
