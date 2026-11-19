@@ -1,5 +1,6 @@
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
+import { useAuth } from '../context/AuthContext'
 
 const linkClass = ({ isActive }) =>
     `rounded-full px-4 py-1.5 text-sm font-semibold transition ${
@@ -9,6 +10,14 @@ const linkClass = ({ isActive }) =>
     }`
 
 export default function Navbar() {
+    const { user, logout } = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logout()
+        navigate('/login', { replace: true })
+    }
+
     return (
         <nav className="sticky top-0 z-10 bg-white shadow-sm">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-2">
@@ -27,9 +36,31 @@ export default function Navbar() {
                 </Link>
 
                 <div className="flex items-center gap-1">
-                    <NavLink to="/" end className={linkClass}>New Prompt</NavLink>
-                    <NavLink to="/history" className={linkClass}>History</NavLink>
-                    <NavLink to="/evaluation" className={linkClass}>Evaluation</NavLink>
+                    {user ? (
+                        <>
+                            <NavLink to="/" end className={linkClass}>New Prompt</NavLink>
+                            <NavLink to="/history" className={linkClass}>History</NavLink>
+                            <NavLink to="/evaluation" className={linkClass}>Evaluation</NavLink>
+                            <span
+                                className="ml-3 hidden max-w-[8rem] truncate text-sm text-gray-500 md:block"
+                                title={user.email}
+                            >
+                                {user.name}
+                            </span>
+                            <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="ml-1 rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold text-gray-600 hover:bg-gray-100"
+                            >
+                                Log out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink to="/login" className={linkClass}>Log in</NavLink>
+                            <NavLink to="/register" className={linkClass}>Sign up</NavLink>
+                        </>
+                    )}
                 </div>
             </div>
             {/* prism rainbow line */}

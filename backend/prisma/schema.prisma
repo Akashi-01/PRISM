@@ -33,6 +33,10 @@ model PromptSession {
   evaluationSummaries EvaluationSummary[]
   experimentItems ExperimentItem[]
   humanRatings    HumanRating[]
+  userId          Int?
+  user            User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
 }
 
 model StageResult {
@@ -144,4 +148,13 @@ model HumanRating {
   session PromptSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@unique([sessionId, rater])
+}
+
+model User {
+  id           Int             @id @default(autoincrement())
+  email        String          @unique
+  passwordHash String
+  name         String          @db.VarChar(100)
+  createdAt    DateTime        @default(now())
+  sessions     PromptSession[]
 }
