@@ -13,7 +13,10 @@ export const clearToken = () => {
   try { localStorage.removeItem(TOKEN_KEY) } catch { /* storage unavailable */ }
 }
 
-export const api = axios.create({ baseURL: '/api', timeout: 120000 })
+// In production (Vercel) VITE_API_URL points to the Render backend.
+// Locally it is unset, so requests go to /api and the Vite proxy handles them.
+const API_ORIGIN = import.meta.env.VITE_API_URL ?? ''
+export const api = axios.create({ baseURL: `${API_ORIGIN}/api`, timeout: 120000 })
 
 api.interceptors.request.use((config) => {
   const token = getToken()
